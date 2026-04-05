@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import Card from '../../components/common/Card';
 import GradientCard from '../../components/common/GradientCard';
-import { colors, gradients, typography, spacing, borderRadius, shadows } from '../../constants/theme';
+import { colors, gradients, typography, spacing, borderRadius } from '../../constants/theme';
 import { useWalletStore } from '../../store/useWalletStore';
-import { useAuthStore } from '../../store/useAuthStore';
-import { formatCurrency, formatDate, getTimeAgo } from '../../utils/formatters';
+import { formatCurrency, getTimeAgo } from '../../utils/formatters';
 
 const WALLET_ACTIONS = [
   { id: '1', icon: '🪪', label: 'Digital ID', route: 'DigitalID' },
@@ -22,7 +19,6 @@ const WALLET_ACTIONS = [
 export default function WalletDashboardScreen() {
   const navigation = useNavigation<any>();
   const { balance, currency, getRecentTransactions } = useWalletStore();
-  const user = useAuthStore((s) => s.user);
   const recentTxns = getRecentTransactions(5);
 
   return (
@@ -33,15 +29,15 @@ export default function WalletDashboardScreen() {
           <Text style={styles.balanceLabel}>Total Balance</Text>
           <Text style={styles.balanceAmount}>{formatCurrency(balance, currency)}</Text>
           <View style={styles.balanceActions}>
-            <TouchableOpacity style={styles.balanceBtn}>
+            <TouchableOpacity style={styles.balanceBtn} onPress={() => Alert.alert('Top Up', 'SAR 1,000 has been added to your wallet.', [{ text: 'OK' }])}>
               <Text style={styles.balanceBtnIcon}>{'\u2795'}</Text>
               <Text style={styles.balanceBtnText}>Top Up</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.balanceBtn}>
+            <TouchableOpacity style={styles.balanceBtn} onPress={() => Alert.alert('Send Money', 'Enter the recipient details to send money.', [{ text: 'OK' }])}>
               <Text style={styles.balanceBtnIcon}>{'\uD83D\uDCE4'}</Text>
               <Text style={styles.balanceBtnText}>Send</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.balanceBtn}>
+            <TouchableOpacity style={styles.balanceBtn} onPress={() => Alert.alert('Receive Money', 'Share your wallet ID to receive funds:\nWallet: SA-EXPLORE-2026', [{ text: 'Copy', onPress: () => {} }, { text: 'OK' }])}>
               <Text style={styles.balanceBtnIcon}>{'\uD83D\uDCE5'}</Text>
               <Text style={styles.balanceBtnText}>Receive</Text>
             </TouchableOpacity>

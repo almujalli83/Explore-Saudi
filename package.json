@@ -2,18 +2,26 @@
   "name": "explore-saudi",
   "version": "1.0.0",
   "description": "The Ultimate Saudi Tourism Super App",
-  "main": "App.tsx",
+  "main": "expo/AppEntry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:web": "npx expo export --platform web",
+    "deploy": "npx gh-pages -d dist"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/almujalli83/Explore-Saudi.git"
   },
-  "keywords": ["saudi", "tourism", "travel", "expo", "react-native"],
+  "keywords": [
+    "saudi",
+    "tourism",
+    "travel",
+    "expo",
+    "react-native"
+  ],
   "author": "Explore Saudi Team",
   "license": "ISC",
   "bugs": {
@@ -47,7 +55,11 @@
     "react-native-safe-area-context": "~5.6.2",
     "react-native-screens": "~4.23.0",
     "react-native-svg": "15.15.3",
+    "react-native-web": "^0.21.0",
     "typescript": "^5.9.3",
     "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

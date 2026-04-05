@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import ImageCarousel from '../../components/common/ImageCarousel';
 import Button from '../../components/common/Button';
@@ -8,6 +8,8 @@ import Card from '../../components/common/Card';
 import PriceBadge from '../../components/common/PriceBadge';
 import { colors, typography, spacing, borderRadius, shadows } from '../../constants/theme';
 import { hotels } from '../../services/mockData/hotels';
+import { useWalletStore } from '../../store/useWalletStore';
+import { useAuthStore } from '../../store/useAuthStore';
 import { formatCurrency } from '../../utils/formatters';
 
 export default function HotelDetailScreen() {
@@ -15,6 +17,8 @@ export default function HotelDetailScreen() {
   const route = useRoute<any>();
   const hotel = hotels.find((h) => h.id === route.params?.id);
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+  const { balance, addTransaction } = useWalletStore();
+  const user = useAuthStore((s) => s.user);
 
   if (!hotel) return <View style={styles.center}><Text>Hotel not found</Text></View>;
 
@@ -83,7 +87,34 @@ export default function HotelDetailScreen() {
           <PriceBadge price={hotel.pricePerNight} size="lg" />
           <Text style={styles.bottomPerNight}>per night</Text>
         </View>
-        <Button title="Book Now" onPress={() => {}} size="lg" disabled={!selectedRoom} />
+        <Button
+          title="Book Now"
+          onPress={() => {
+            const room = hotel.roomTypes.find((r) => r.name === selectedRoom);
+            const price = room?.price ?? hotel.pricePerNight;
+            if (balance < price) {
+              Alert.alert('Insufficient Balance', `You need ${formatCurrency(price)} but your balance is ${formatCurrency(balance)}.\n\nPlease top up your wallet first.`, [{ text: 'OK' }]);
+              return;
+            }
+            addTransaction({
+              id: `txn_${Date.now()}`,
+              type: 'payment',
+              amount: -price,
+              currency: 'SAR',
+              description: `${hotel.name} - ${selectedRoom}`,
+              date: new Date().toISOString(),
+              category: 'accommodation',
+              merchantLogo: '',
+            });
+            Alert.alert(
+              'Booking Confirmed!',
+              `Your room at ${hotel.name} has been booked!\n\nGuest: ${user?.name ?? 'Guest'}\nRoom: ${selectedRoom}\nPrice: ${formatCurrency(price)} / night\nLocation: ${hotel.city}\n\n${formatCurrency(price)} deducted from wallet.`,
+              [{ text: 'OK', onPress: () => navigation.goBack() }]
+            );
+          }}
+          size="lg"
+          disabled={!selectedRoom}
+        />
       </View>
     </View>
   );
@@ -125,7 +156,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.lg + 10,
+    backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.xl,
     borderTopWidth: 1, borderTopColor: colors.pearl, ...shadows.large,
   },
   bottomLabel: { fontSize: typography.sizes.xs, color: colors.slate },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors, typography, spacing } from '../constants/theme';
@@ -13,11 +14,11 @@ import ProfileStack from './ProfileStack';
 const Tab = createBottomTabNavigator();
 
 const TAB_ICONS: Record<string, string> = {
-  HomeTab: '🏠',
-  ExploreTab: '🧭',
-  WalletTab: '💳',
-  ServicesTab: '⚡',
-  ProfileTab: '👤',
+  HomeTab: '\uD83C\uDFE0',
+  ExploreTab: '\uD83E\uDDED',
+  WalletTab: '\uD83D\uDCB3',
+  ServicesTab: '\u26A1',
+  ProfileTab: '\uD83D\uDC64',
 };
 
 const TAB_LABELS: Record<string, string> = {
@@ -28,12 +29,34 @@ const TAB_LABELS: Record<string, string> = {
   ProfileTab: 'Profile',
 };
 
-function CustomTabBar({ state, descriptors, navigation }: any) {
+// Screens where the tab bar should be hidden (detail/sub screens)
+const HIDDEN_TAB_SCREENS = new Set([
+  'AttractionDetail', 'VenueDetail', 'EventDetail', 'SeatSelection', 'TicketCheckout',
+  'RestaurantDetail', 'Reservation', 'MallDetail', 'HotelDetail',
+  'Entertainment', 'Dining', 'Shopping', 'Accommodation',
+  'AITripPlanner', 'PrayerTimes', 'CulturalGuide', 'CuisineFinder',
+  'Transport', 'EmergencySOS', 'OfflineMaps', 'Insurance', 'LanguageHelper', 'VisaPackage',
+  'DigitalID', 'Payment', 'CurrencyExchange', 'ExpenseTracker', 'LoyaltyCards', 'MyTickets',
+  'MyBookings', 'NFTCollection', 'Reviews', 'ShareExperience', 'PhotoSpots', 'Settings',
+  'Notifications',
+]);
+
+function shouldHideTabBar(route: any): boolean {
+  const routeName = getFocusedRouteNameFromRoute(route);
+  if (!routeName) return false;
+  return HIDDEN_TAB_SCREENS.has(routeName);
+}
+
+function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  // Check if any focused route requires hiding the tab bar
+  const currentRoute = state.routes[state.index];
+  if (shouldHideTabBar(currentRoute)) return null;
+
   return (
     <View style={styles.tabBarContainer}>
       <BlurView intensity={80} tint="light" style={styles.blurView}>
         <View style={styles.tabBar}>
-          {state.routes.map((route: any, index: number) => {
+          {state.routes.map((route, index) => {
             const isFocused = state.index === index;
             const isWallet = route.name === 'WalletTab';
 
@@ -48,12 +71,12 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
               return (
                 <TouchableOpacity key={route.key} onPress={onPress} style={styles.walletTabWrapper}>
                   <LinearGradient
-                    colors={[colors.sand, colors.sandDark]}
+                    colors={[colors.primary, colors.primaryDark]}
                     style={styles.walletTab}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                   >
-                    <Text style={styles.walletIcon}>💳</Text>
+                    <Text style={styles.walletIcon}>{'\uD83D\uDCB3'}</Text>
                   </LinearGradient>
                   <Text style={[styles.tabLabel, isFocused && styles.tabLabelActive]}>
                     {TAB_LABELS[route.name]}
@@ -108,7 +131,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     overflow: 'hidden',
     borderTopWidth: 0.5,
-    borderTopColor: 'rgba(212, 168, 83, 0.2)',
+    borderTopColor: 'rgba(132, 110, 219, 0.2)',
   },
   tabBar: {
     flexDirection: 'row',
@@ -138,7 +161,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   tabLabelActive: {
-    color: colors.sand,
+    color: colors.primary,
     fontWeight: '700',
   },
   walletTabWrapper: {
@@ -153,7 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: colors.sand,
+    shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 8,

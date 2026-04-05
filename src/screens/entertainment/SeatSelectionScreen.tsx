@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   summaryCount: { fontSize: typography.sizes.md, fontWeight: '600', color: colors.sand, marginTop: 4 },
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
-    padding: spacing.md, paddingBottom: spacing.lg + 10,
+    padding: spacing.md, paddingBottom: spacing.xl,
     backgroundColor: colors.white, borderTopWidth: 1, borderTopColor: colors.pearl,
   },
 });

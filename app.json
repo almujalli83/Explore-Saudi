@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "backgroundColor": "#1A1A2E",
+      "backgroundColor": "#051f1f",
       "resizeMode": "contain"
     },
     "ios": {
@@ -17,9 +17,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#1A1A2E"
+        "backgroundColor": "#051f1f"
       },
       "package": "com.exploresaudi.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/Explore-Saudi"
     },
     "plugins": [
       "expo-font",

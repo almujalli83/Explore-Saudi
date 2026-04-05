@@ -1,11 +1,14 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Header from '../../components/common/Header';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import { colors, gradients, typography, spacing, borderRadius } from '../../constants/theme';
+import { useWalletStore } from '../../store/useWalletStore';
+import { useAuthStore } from '../../store/useAuthStore';
+import { formatCurrency } from '../../utils/formatters';
 
 const PLANS = [
   {
@@ -27,6 +30,9 @@ const PLANS = [
 
 export default function InsuranceScreen() {
   const navigation = useNavigation();
+  const { balance, addTransaction } = useWalletStore();
+  const user = useAuthStore((s) => s.user);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   return (
     <View style={styles.container}>
@@ -60,8 +66,29 @@ export default function InsuranceScreen() {
             ))}
             <View style={styles.btnWrap}>
               <Button
-                title="Select Plan"
-                onPress={() => {}}
+                title={selectedPlan === plan.id ? 'Selected' : 'Select Plan'}
+                onPress={() => {
+                  if (balance < plan.price) {
+                    Alert.alert('Insufficient Balance', `You need ${formatCurrency(plan.price)} but your balance is ${formatCurrency(balance)}.\n\nPlease top up your wallet first.`, [{ text: 'OK' }]);
+                    return;
+                  }
+                  addTransaction({
+                    id: `txn_${Date.now()}`,
+                    type: 'payment',
+                    amount: -plan.price,
+                    currency: 'SAR',
+                    description: `Travel Insurance - ${plan.name}`,
+                    date: new Date().toISOString(),
+                    category: 'insurance',
+                    merchantLogo: 'https://img.icons8.com/color/48/insurance.png',
+                  });
+                  setSelectedPlan(plan.id);
+                  Alert.alert(
+                    'Insurance Purchased!',
+                    `${user?.name ?? 'Guest'} — your ${plan.name} plan is confirmed.\n\nPrice: ${formatCurrency(plan.price)} ${plan.period}\n${formatCurrency(plan.price)} deducted from wallet.\n\nCoverage will begin upon your arrival in Saudi Arabia.`,
+                    [{ text: 'OK' }]
+                  );
+                }}
                 variant={plan.recommended ? 'primary' : 'outline'}
                 fullWidth
               />

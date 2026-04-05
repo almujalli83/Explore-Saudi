@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/common/Header';
 import Button from '../../components/common/Button';
@@ -10,7 +10,7 @@ import { formatCurrency } from '../../utils/formatters';
 
 export default function PaymentScreen() {
   const navigation = useNavigation();
-  const { balance } = useWalletStore();
+  const { balance, addTransaction } = useWalletStore();
   const [amount, setAmount] = useState('');
 
   const QUICK_AMOUNTS = [50, 100, 200, 500];
@@ -63,7 +63,24 @@ export default function PaymentScreen() {
         <View style={styles.btnWrap}>
           <Button
             title="Pay Now"
-            onPress={() => {}}
+            onPress={() => {
+              const numAmount = Number(amount);
+              addTransaction({
+                id: `txn_${Date.now()}`,
+                type: 'payment',
+                amount: -numAmount,
+                currency: 'SAR',
+                description: 'Payment Sent',
+                date: new Date().toISOString(),
+                category: 'transfer',
+                merchantLogo: 'https://img.icons8.com/color/48/send.png',
+              });
+              Alert.alert(
+                'Payment Sent!',
+                `${formatCurrency(numAmount)} has been sent successfully.\n\n${formatCurrency(numAmount)} deducted from wallet.`,
+                [{ text: 'OK', onPress: () => { setAmount(''); navigation.goBack(); } }]
+              );
+            }}
             size="lg"
             fullWidth
             disabled={!amount || Number(amount) > balance}

@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/common/Header';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import { colors, typography, spacing, borderRadius } from '../../constants/theme';
 
-const MAPS = [
+const INITIAL_MAPS = [
   { id: '1', city: 'Riyadh', size: '45 MB', downloaded: true },
   { id: '2', city: 'Jeddah', size: '38 MB', downloaded: true },
   { id: '3', city: 'Makkah', size: '22 MB', downloaded: false },
@@ -19,6 +19,7 @@ const MAPS = [
 
 export default function OfflineMapsScreen() {
   const navigation = useNavigation();
+  const [maps, setMaps] = useState(INITIAL_MAPS);
 
   return (
     <View style={styles.container}>
@@ -31,7 +32,7 @@ export default function OfflineMapsScreen() {
           </Text>
         </Card>
 
-        {MAPS.map((map) => (
+        {maps.map((map) => (
           <View key={map.id} style={styles.mapRow}>
             <Text style={styles.mapIcon}>{'\uD83D\uDDFA\uFE0F'}</Text>
             <View style={styles.mapInfo}>
@@ -43,7 +44,15 @@ export default function OfflineMapsScreen() {
                 <Text style={styles.downloadedText}>{'\u2705'} Downloaded</Text>
               </View>
             ) : (
-              <Button title="Download" onPress={() => {}} size="sm" variant="outline" />
+              <Button
+                title="Download"
+                onPress={() => {
+                  setMaps((prev) => prev.map((m) => m.id === map.id ? { ...m, downloaded: true } : m));
+                  Alert.alert('Download Complete', `${map.city} map (${map.size}) has been downloaded for offline use.`, [{ text: 'OK' }]);
+                }}
+                size="sm"
+                variant="outline"
+              />
             )}
           </View>
         ))}

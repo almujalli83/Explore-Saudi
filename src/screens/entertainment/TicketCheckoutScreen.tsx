@@ -8,6 +8,7 @@ import Card from '../../components/common/Card';
 import { colors, gradients, typography, spacing, borderRadius } from '../../constants/theme';
 import { entertainmentEvents } from '../../services/mockData/entertainment';
 import { useWalletStore } from '../../store/useWalletStore';
+import { useAuthStore } from '../../store/useAuthStore';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 
 export default function TicketCheckoutScreen() {
@@ -17,6 +18,7 @@ export default function TicketCheckoutScreen() {
   const event = entertainmentEvents.find((e) => e.id === eventId);
   const ticket = event?.ticketTypes.find((t) => t.id === ticketTypeId);
   const { balance, addTransaction, addTicket } = useWalletStore();
+  const user = useAuthStore((s) => s.user);
   const [success, setSuccess] = useState(false);
 
   const totalPrice = (ticket?.price ?? 0) * (quantity ?? 1);
@@ -56,6 +58,8 @@ export default function TicketCheckoutScreen() {
           <Text style={styles.successVenue}>{event?.venue}</Text>
           <Text style={styles.successDate}>{formatDate(event?.date ?? '')}</Text>
           <Text style={styles.successTicket}>{ticket?.name} x{quantity}</Text>
+          <Text style={styles.successGuest}>{'\uD83D\uDC64'} {user?.name ?? 'Guest'}</Text>
+          <Text style={styles.successDeducted}>{'\uD83D\uDCB3'} {formatCurrency(totalPrice)} deducted from wallet</Text>
         </Card>
         <View style={styles.successButtons}>
           <Button title="View My Tickets" onPress={() => navigation.getParent()?.getParent()?.navigate('WalletTab', { screen: 'MyTickets' })} fullWidth />
@@ -72,6 +76,10 @@ export default function TicketCheckoutScreen() {
         {/* Order Summary */}
         <Card variant="elevated" style={styles.orderCard}>
           <Text style={styles.orderTitle}>{event?.name}</Text>
+          <View style={styles.orderRow}>
+            <Text style={styles.orderLabel}>Guest</Text>
+            <Text style={styles.orderValue}>{user?.name ?? 'Guest'}</Text>
+          </View>
           <View style={styles.orderRow}>
             <Text style={styles.orderLabel}>Venue</Text>
             <Text style={styles.orderValue}>{event?.venue}</Text>
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
   insufficientText: { fontSize: typography.sizes.sm, color: colors.error, marginTop: spacing.sm },
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
-    padding: spacing.md, paddingBottom: spacing.lg + 10,
+    padding: spacing.md, paddingBottom: spacing.xl,
     backgroundColor: colors.white, borderTopWidth: 1, borderTopColor: colors.pearl,
   },
   successContainer: { flex: 1, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center', padding: spacing.xl },
@@ -170,5 +178,7 @@ const styles = StyleSheet.create({
   successVenue: { fontSize: typography.sizes.sm, color: colors.slate, marginTop: 4 },
   successDate: { fontSize: typography.sizes.sm, color: colors.sand, fontWeight: '600', marginTop: 4 },
   successTicket: { fontSize: typography.sizes.sm, color: colors.slate, marginTop: 4 },
+  successGuest: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.charcoal, marginTop: spacing.sm },
+  successDeducted: { fontSize: typography.sizes.sm, color: colors.sand, fontWeight: '600', marginTop: 4 },
   successButtons: { marginTop: spacing.xl, width: '100%', gap: spacing.sm },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import ImageCarousel from '../../components/common/ImageCarousel';
 import Button from '../../components/common/Button';
@@ -104,7 +104,19 @@ export default function AttractionDetailScreen() {
           <Text style={styles.bottomLabel}>Entry Fee</Text>
           <PriceBadge price={attraction.price} size="lg" />
         </View>
-        <Button title={attraction.price === 0 ? 'Visit Now' : 'Book Ticket'} onPress={() => {}} size="lg" />
+        <Button
+          title={attraction.price === 0 ? 'Visit Now' : 'Book Ticket'}
+          onPress={() => {
+            Alert.alert(
+              attraction.price === 0 ? 'Directions' : 'Booking Confirmed',
+              attraction.price === 0
+                ? `Opening Maps to ${attraction.name}, ${attraction.city}...`
+                : `Your ticket for ${attraction.name} has been booked!\n\nEntry fee: ${attraction.price} SAR\nLocation: ${attraction.city}`,
+              [{ text: 'OK' }]
+            );
+          }}
+          size="lg"
+        />
       </View>
     </View>
   );
@@ -153,7 +165,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.lg + 10,
+    backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.xl,
     borderTopWidth: 1, borderTopColor: colors.pearl,
     ...shadows.large,
   },

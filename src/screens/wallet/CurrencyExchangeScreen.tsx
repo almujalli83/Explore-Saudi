@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', paddingVertical: spacing.sm + 2,
     borderBottomWidth: 1, borderBottomColor: colors.pearl, paddingHorizontal: spacing.xs,
   },
-  currItemActive: { backgroundColor: 'rgba(212,168,83,0.08)', borderRadius: borderRadius.md },
+  currItemActive: { backgroundColor: 'rgba(132,110,219,0.08)', borderRadius: borderRadius.md },
   currFlag: { fontSize: 24, marginRight: spacing.sm },
   currInfo: { flex: 1 },
   currCode: { fontSize: typography.sizes.md, fontWeight: '600', color: colors.charcoal },

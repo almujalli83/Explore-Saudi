@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.lg + 10,
+    backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.xl,
     borderTopWidth: 1, borderTopColor: colors.pearl, ...shadows.large,
   },
   bottomLabel: { fontSize: typography.sizes.xs, color: colors.slate, marginBottom: 4 },

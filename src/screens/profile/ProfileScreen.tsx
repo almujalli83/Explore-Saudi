@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import Card from '../../components/common/Card';
-import { colors, typography, spacing, borderRadius, shadows } from '../../constants/theme';
+import { colors, typography, spacing, borderRadius } from '../../constants/theme';
 import { useAuthStore } from '../../store/useAuthStore';
 
 const MENU_ITEMS = [
@@ -63,7 +62,15 @@ export default function ProfileScreen() {
         </View>
 
         {/* Logout */}
-        <TouchableOpacity style={styles.logoutBtn}>
+        <TouchableOpacity
+          style={styles.logoutBtn}
+          onPress={() => {
+            Alert.alert('Log Out', 'Are you sure you want to log out?', [
+              { text: 'Cancel', style: 'cancel' },
+              { text: 'Log Out', style: 'destructive', onPress: () => useAuthStore.getState().logout() },
+            ]);
+          }}
+        >
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>
 

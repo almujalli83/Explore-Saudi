@@ -1,11 +1,10 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/common/Header';
-import Card from '../../components/common/Card';
 import { colors, typography, spacing, borderRadius } from '../../constants/theme';
 
-const NOTIFICATIONS = [
+const INITIAL_NOTIFICATIONS = [
   { id: '1', icon: '🎟️', title: 'F1 Saudi Grand Prix', body: 'Tickets are selling fast! Book your Jeddah Corniche Circuit experience now.', time: '2h ago', unread: true },
   { id: '2', icon: '💳', title: 'Wallet Top-up', body: 'SAR 5,000.00 has been added to your wallet via Visa.', time: '5h ago', unread: true },
   { id: '3', icon: '🕌', title: 'Prayer Reminder', body: 'Asr prayer time at 3:30 PM. King Fahd Grand Mosque is 350m away.', time: '6h ago', unread: false },
@@ -16,17 +15,37 @@ const NOTIFICATIONS = [
 ];
 
 export default function NotificationsScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
+
+  const handlePress = (item: typeof INITIAL_NOTIFICATIONS[0]) => {
+    // Mark as read
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === item.id ? { ...n, unread: false } : n))
+    );
+    Alert.alert(item.title, item.body, [{ text: 'OK' }]);
+  };
+
+  const markAllRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })));
+  };
+
+  const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
     <View style={styles.container}>
       <Header title="Notifications" showBack onBack={() => navigation.goBack()} />
+      {unreadCount > 0 && (
+        <TouchableOpacity style={styles.markAllBtn} onPress={markAllRead}>
+          <Text style={styles.markAllText}>Mark all as read ({unreadCount})</Text>
+        </TouchableOpacity>
+      )}
       <FlatList
-        data={NOTIFICATIONS}
+        data={notifications}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         renderItem={({ item }) => (
-          <TouchableOpacity style={[styles.notifItem, item.unread && styles.unread]}>
+          <TouchableOpacity style={[styles.notifItem, item.unread && styles.unread]} onPress={() => handlePress(item)}>
             <View style={styles.iconWrap}>
               <Text style={styles.icon}>{item.icon}</Text>
             </View>
@@ -54,7 +73,7 @@ const styles = StyleSheet.create({
     padding: spacing.sm + 4,
     borderRadius: borderRadius.md,
   },
-  unread: { backgroundColor: 'rgba(212,168,83,0.08)' },
+  unread: { backgroundColor: 'rgba(132,110,219,0.08)' },
   iconWrap: {
     width: 44, height: 44, borderRadius: 12, backgroundColor: colors.pearl,
     alignItems: 'center', justifyContent: 'center', marginRight: spacing.sm,
@@ -67,4 +86,6 @@ const styles = StyleSheet.create({
   body: { fontSize: typography.sizes.sm, color: colors.slate, marginTop: 2, lineHeight: 18 },
   time: { fontSize: typography.sizes.xs, color: colors.slate, marginTop: 4 },
   separator: { height: 1, backgroundColor: colors.pearl, marginVertical: spacing.xs },
+  markAllBtn: { alignItems: 'flex-end', paddingHorizontal: spacing.md, paddingTop: spacing.sm },
+  markAllText: { fontSize: typography.sizes.sm, color: colors.sand, fontWeight: '600' },
 });

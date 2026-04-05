@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md, paddingHorizontal: spacing.md,
     borderRadius: borderRadius.md, marginBottom: spacing.xs,
   },
-  prayerRowActive: { backgroundColor: 'rgba(10,110,110,0.08)' },
+  prayerRowActive: { backgroundColor: 'rgba(132,110,219,0.08)' },
   prayerLeft: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   prayerIcon: { fontSize: 24 },
   prayerName: { fontSize: typography.sizes.md, fontWeight: '600', color: colors.charcoal },

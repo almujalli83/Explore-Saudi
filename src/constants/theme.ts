@@ -1,28 +1,65 @@
 import { Platform } from 'react-native';
 
+// Design system inspired by mt.gov.sa (Saudi Ministry of Tourism)
+// Font: FS Albert Pro / FS Albert Arabic
+// Primary: Purple (#846edb) — links, CTAs, focus
+// Secondary: Lime (#d7f285) — highlights, badges
+// Dark: Deep green-black (#051f1f) — body text, headers
+// SlateGreen: (#053333) — dark backgrounds, cards
+// Success: Emerald (#2fba89) — confirmations
+// Info: Mint (#82d9bf) — info, accents
+// Warning: Amber (#ffb752)
+// Danger: Crimson (#962640)
+
 export const colors = {
-  sand: '#D4A853',
-  sandLight: '#E8CC8C',
-  sandDark: '#B8922E',
-  teal: '#0A6E6E',
-  tealLight: '#1A9E9E',
-  tealDark: '#064D4D',
-  charcoal: '#1A1A2E',
-  slate: '#4A4A5A',
-  pearl: '#F5F0E8',
-  cream: '#FDF8F0',
+  // Primary brand
+  primary: '#846edb',
+  primaryLight: '#b5a8e9',
+  primaryDark: '#6a58af',
+
+  // Secondary / accent
+  secondary: '#d7f285',
+  secondaryDark: '#b5cc5e',
+
+  // Greens (signature mt.gov.sa)
+  teal: '#053333',
+  tealLight: '#214242',
+  tealDark: '#051f1f',
+
+  // Mint / info accent
+  mint: '#82d9bf',
+  mintLight: '#b4e8d9',
+
+  // Neutrals
+  charcoal: '#051f1f',
+  slate: '#547070',
+  pearl: '#e6ebeb',
+  cream: '#f8f9fa',
   white: '#FFFFFF',
-  success: '#2ECC71',
-  warning: '#F39C12',
-  error: '#E74C3C',
-  info: '#3498DB',
+
+  // Semantic
+  success: '#2fba89',
+  warning: '#ffb752',
+  error: '#962640',
+  info: '#82d9bf',
+
+  // Legacy aliases (ease migration)
+  sand: '#846edb',
+  sandLight: '#b5a8e9',
+  sandDark: '#6a58af',
 } as const;
 
 export const gradients = {
-  goldGradient: ['#D4A853', '#E8CC8C', '#B8922E'] as const,
-  tealGradient: ['#064D4D', '#0A6E6E', '#1A9E9E'] as const,
-  nightGradient: ['#1A1A2E', '#2D2D44', '#4A4A5A'] as const,
-  sunsetGradient: ['#D4A853', '#E74C3C', '#1A1A2E'] as const,
+  goldGradient: ['#846edb', '#b5a8e9', '#6a58af'] as const,
+  tealGradient: ['#051f1f', '#053333', '#214242'] as const,
+  nightGradient: ['#051f1f', '#053333', '#547070'] as const,
+  sunsetGradient: ['#846edb', '#82d9bf', '#053333'] as const,
+  // mt.gov.sa signature animated gradient
+  mtGovGradient: ['#003232', '#009696', '#007846', '#00a000'] as const,
+  // Purple to mint
+  primaryGradient: ['#6a58af', '#846edb', '#b5a8e9'] as const,
+  // Success gradient
+  successGradient: ['#2fba89', '#82d9bf'] as const,
 } as const;
 
 export const typography = {
@@ -62,7 +99,7 @@ export const borderRadius = {
 export const shadows = {
   small: Platform.select({
     ios: {
-      shadowColor: '#000',
+      shadowColor: '#030f0f',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.08,
       shadowRadius: 4,
@@ -74,7 +111,7 @@ export const shadows = {
   }),
   medium: Platform.select({
     ios: {
-      shadowColor: '#000',
+      shadowColor: '#030f0f',
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.12,
       shadowRadius: 8,
@@ -86,7 +123,7 @@ export const shadows = {
   }),
   large: Platform.select({
     ios: {
-      shadowColor: '#000',
+      shadowColor: '#030f0f',
       shadowOffset: { width: 0, height: 8 },
       shadowOpacity: 0.18,
       shadowRadius: 16,

@@ -7,11 +7,12 @@ import Card from '../../components/common/Card';
 import { colors, gradients, typography, spacing, borderRadius } from '../../constants/theme';
 
 const SERVICES = [
-  { id: '1', icon: '🚇', title: 'Transport', subtitle: 'Metro, bus, train & ride-hailing', route: 'Transport', colors: ['#064D4D', '#0A6E6E'] },
-  { id: '2', icon: '🆘', title: 'Emergency SOS', subtitle: 'Emergency contacts & assistance', route: 'EmergencySOS', colors: ['#E74C3C', '#C0392B'] },
-  { id: '3', icon: '🗺️', title: 'Offline Maps', subtitle: 'Download maps for offline use', route: 'OfflineMaps', colors: ['#3498DB', '#2980B9'] },
-  { id: '4', icon: '🛡️', title: 'Travel Insurance', subtitle: 'Health & travel coverage', route: 'Insurance', colors: ['#2ECC71', '#27AE60'] },
-  { id: '5', icon: '🗣️', title: 'Language Helper', subtitle: 'Arabic phrases & translator', route: 'LanguageHelper', colors: ['#D4A853', '#B8922E'] },
+  { id: '1', icon: '✈️', title: 'Visa & Package', subtitle: 'Flight, hotel & instant e-Visa', route: 'VisaPackage', colors: ['#6a58af', '#846edb'] as const },
+  { id: '2', icon: '🚇', title: 'Transport', subtitle: 'Metro, bus, train & ride-hailing', route: 'Transport', colors: ['#053333', '#214242'] as const },
+  { id: '3', icon: '🆘', title: 'Emergency SOS', subtitle: 'Emergency contacts & assistance', route: 'EmergencySOS', colors: ['#962640', '#cf6d84'] as const },
+  { id: '4', icon: '🗺️', title: 'Offline Maps', subtitle: 'Download maps for offline use', route: 'OfflineMaps', colors: ['#053333', '#547070'] as const },
+  { id: '5', icon: '🛡️', title: 'Travel Insurance', subtitle: 'Health & travel coverage', route: 'Insurance', colors: ['#2fba89', '#82d9bf'] as const },
+  { id: '6', icon: '🗣️', title: 'Language Helper', subtitle: 'Arabic phrases & translator', route: 'LanguageHelper', colors: ['#846edb', '#b5a8e9'] as const },
 ];
 
 export default function ServicesScreen() {

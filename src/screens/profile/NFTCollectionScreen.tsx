@@ -7,12 +7,12 @@ import { colors, typography, spacing, borderRadius } from '../../constants/theme
 import { SCREEN_WIDTH } from '../../constants/layout';
 
 const NFTS = [
-  { id: '1', name: 'Hegra Explorer', desc: 'Visited Hegra UNESCO Site', icon: '🏛️', colors: ['#D4A853', '#B8922E'] },
-  { id: '2', name: 'Edge Walker', desc: 'Reached Edge of the World', icon: '🏔️', colors: ['#064D4D', '#0A6E6E'] },
-  { id: '3', name: 'Foodie Legend', desc: 'Visited 10+ restaurants', icon: '🍽️', colors: ['#E74C3C', '#C0392B'] },
-  { id: '4', name: 'Saudi F1 Fan', desc: 'Attended Saudi Grand Prix', icon: '🏎️', colors: ['#1A1A2E', '#4A4A5A'] },
-  { id: '5', name: 'Desert Star', desc: 'Stargazing in Empty Quarter', icon: '⭐', colors: ['#2ECC71', '#1A9E9E'] },
-  { id: '6', name: 'Culture Keeper', desc: 'Completed Cultural Guide', icon: '📖', colors: ['#F39C12', '#D4A853'] },
+  { id: '1', name: 'Hegra Explorer', desc: 'Visited Hegra UNESCO Site', icon: '🏛️', colors: ['#846edb', '#6a58af'] as const },
+  { id: '2', name: 'Edge Walker', desc: 'Reached Edge of the World', icon: '🏔️', colors: ['#051f1f', '#053333'] as const },
+  { id: '3', name: 'Foodie Legend', desc: 'Visited 10+ restaurants', icon: '🍽️', colors: ['#962640', '#cf6d84'] as const },
+  { id: '4', name: 'Saudi F1 Fan', desc: 'Attended Saudi Grand Prix', icon: '🏎️', colors: ['#214242', '#547070'] as const },
+  { id: '5', name: 'Desert Star', desc: 'Stargazing in Empty Quarter', icon: '⭐', colors: ['#2fba89', '#82d9bf'] as const },
+  { id: '6', name: 'Culture Keeper', desc: 'Completed Cultural Guide', icon: '📖', colors: ['#ffb752', '#846edb'] as const },
 ];
 
 const CARD_W = (SCREEN_WIDTH - spacing.md * 2 - spacing.sm) / 2;

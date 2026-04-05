@@ -10,8 +10,8 @@ const EMERGENCY_NUMBERS = [
   { id: '2', icon: '🚑', name: 'Ambulance', number: '997', color: '#E74C3C' },
   { id: '3', icon: '🚒', name: 'Fire Department', number: '998', color: '#F39C12' },
   { id: '4', icon: '🏥', name: 'Traffic Accidents', number: '993', color: '#2ECC71' },
-  { id: '5', icon: '📞', name: 'Tourist Helpline', number: '930', color: '#D4A853' },
-  { id: '6', icon: '🏛️', name: 'Embassy Assistance', number: '+966-11-488-3800', color: '#4A4A5A' },
+  { id: '5', icon: '📞', name: 'Tourist Helpline', number: '930', color: '#846edb' },
+  { id: '6', icon: '🏛️', name: 'Embassy Assistance', number: '+966-11-488-3800', color: '#547070' },
 ];
 
 const USEFUL_INFO = [

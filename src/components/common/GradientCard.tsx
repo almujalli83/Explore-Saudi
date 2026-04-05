@@ -22,7 +22,7 @@ const GradientCard: React.FC<GradientCardProps> = ({
   style,
   onPress,
 }) => {
-  const gradientColors = colorsProp ?? [...gradients.goldGradient];
+  const gradientColors = (colorsProp ?? [...gradients.goldGradient]) as [string, string, ...string[]];
 
   const content = (
     <LinearGradient

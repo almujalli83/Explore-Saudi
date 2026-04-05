@@ -8,14 +8,14 @@ import { colors, typography, spacing, borderRadius, shadows } from '../../consta
 import { SCREEN_WIDTH } from '../../constants/layout';
 
 const PHOTO_SPOTS = [
-  { id: '1', name: 'Elephant Rock, AlUla', tip: 'Best at golden hour (sunset)', image: 'https://picsum.photos/800/600?random=500', city: 'AlUla' },
-  { id: '2', name: 'Edge of the World', tip: 'Sunrise for dramatic shadows', image: 'https://picsum.photos/800/600?random=501', city: 'Riyadh' },
-  { id: '3', name: 'Maraya Concert Hall', tip: 'Reflections best at midday', image: 'https://picsum.photos/800/600?random=502', city: 'AlUla' },
-  { id: '4', name: 'Jeddah Corniche Fountain', tip: 'Night photography with illumination', image: 'https://picsum.photos/800/600?random=503', city: 'Jeddah' },
-  { id: '5', name: 'Al-Balad Historic District', tip: 'Morning light on Roshan balconies', image: 'https://picsum.photos/800/600?random=504', city: 'Jeddah' },
-  { id: '6', name: 'Diriyah At-Turaif', tip: 'Blue hour for warm tones on mud-brick', image: 'https://picsum.photos/800/600?random=505', city: 'Riyadh' },
-  { id: '7', name: 'Kingdom Tower Sky Bridge', tip: 'Sunset panoramic city views', image: 'https://picsum.photos/800/600?random=506', city: 'Riyadh' },
-  { id: '8', name: 'Rijal Almaa Village', tip: 'Colorful facades in bright daylight', image: 'https://picsum.photos/800/600?random=507', city: 'Asir' },
+  { id: '1', name: 'Elephant Rock, AlUla', tip: 'Best at golden hour (sunset)', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Elephant_rock%2C_Al-%27Ula.jpg/800px-Elephant_rock%2C_Al-%27Ula.jpg', city: 'AlUla' },
+  { id: '2', name: 'Edge of the World', tip: 'Sunrise for dramatic shadows', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Rub_al_Khali_002.JPG/800px-Rub_al_Khali_002.JPG', city: 'Riyadh' },
+  { id: '3', name: 'Maraya Concert Hall', tip: 'Reflections best at midday', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Qasr_al_Farid.JPG/800px-Qasr_al_Farid.JPG', city: 'AlUla' },
+  { id: '4', name: 'Jeddah Corniche Fountain', tip: 'Night photography with illumination', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/BSM_2571.jpg/800px-BSM_2571.jpg', city: 'Jeddah' },
+  { id: '5', name: 'Al-Balad Historic District', tip: 'Morning light on Roshan balconies', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Old_Jeddah_%28Al_Balad%29_architecture_3_Feb_2022.jpg/800px-Old_Jeddah_%28Al_Balad%29_architecture_3_Feb_2022.jpg', city: 'Jeddah' },
+  { id: '6', name: 'Diriyah At-Turaif', tip: 'Blue hour for warm tones on mud-brick', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/At-Turaif_District_of_Diriyah%2C_Saudi_Arabia.jpg/800px-At-Turaif_District_of_Diriyah%2C_Saudi_Arabia.jpg', city: 'Riyadh' },
+  { id: '7', name: 'Kingdom Tower Sky Bridge', tip: 'Sunset panoramic city views', image: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b2/Kingdom_Centre_Riyadh_2024.jpeg/800px-Kingdom_Centre_Riyadh_2024.jpeg', city: 'Riyadh' },
+  { id: '8', name: 'Rijal Almaa Village', tip: 'Colorful facades in bright daylight', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Rijal_Almaa_During_the_Day_2020.jpg/800px-Rijal_Almaa_During_the_Day_2020.jpg', city: 'Asir' },
 ];
 
 export default function PhotoSpotsScreen() {
