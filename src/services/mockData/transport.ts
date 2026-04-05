@@ -1,0 +1,18 @@
+export const transportOptions = [
+  { id: 't1', type: 'metro' as const, name: 'Riyadh Metro - Line 1 (Blue)', nameAr: 'مترو الرياض - الخط 1', route: 'Olaya Street: North to South', fare: 6, duration: '45 min', icon: '🚇' },
+  { id: 't2', type: 'metro' as const, name: 'Riyadh Metro - Line 2 (Green)', nameAr: 'مترو الرياض - الخط 2', route: 'King Abdullah Road: East to West', fare: 6, duration: '50 min', icon: '🚇' },
+  { id: 't3', type: 'metro' as const, name: 'Riyadh Metro - Line 3 (Orange)', nameAr: 'مترو الرياض - الخط 3', route: 'Al Madinah Road Corridor', fare: 6, duration: '40 min', icon: '🚇' },
+  { id: 't4', type: 'metro' as const, name: 'Riyadh Metro - Line 4 (Yellow)', nameAr: 'مترو الرياض - الخط 4', route: 'King Khalid Airport to Downtown', fare: 8, duration: '35 min', icon: '🚇' },
+  { id: 't5', type: 'metro' as const, name: 'Riyadh Metro - Line 5 (Purple)', nameAr: 'مترو الرياض - الخط 5', route: 'King Abdulaziz Road', fare: 6, duration: '30 min', icon: '🚇' },
+  { id: 't6', type: 'metro' as const, name: 'Riyadh Metro - Line 6 (Brown)', nameAr: 'مترو الرياض - الخط 6', route: 'KAFD Financial District Loop', fare: 4, duration: '20 min', icon: '🚇' },
+  { id: 't7', type: 'train' as const, name: 'Haramain High Speed Rail', nameAr: 'قطار الحرمين السريع', route: 'Makkah - Jeddah - Madinah', fare: 150, duration: '2h 10min', icon: '🚄' },
+  { id: 't8', type: 'train' as const, name: 'SAR North Train', nameAr: 'قطار سار الشمال', route: 'Riyadh - Qassim - Hail - Al Jawf', fare: 120, duration: '6h', icon: '🚆' },
+  { id: 't9', type: 'bus' as const, name: 'SAPTCO Express', nameAr: 'سابتكو اكسبرس', route: 'Riyadh - Dammam', fare: 65, duration: '4h 30min', icon: '🚌' },
+  { id: 't10', type: 'bus' as const, name: 'SAPTCO Express', nameAr: 'سابتكو اكسبرس', route: 'Riyadh - Jeddah', fare: 150, duration: '8h', icon: '🚌' },
+  { id: 't11', type: 'bus' as const, name: 'Riyadh Public Bus', nameAr: 'حافلات الرياض', route: 'City-wide network - 24 routes', fare: 4, duration: 'Varies', icon: '🚍' },
+  { id: 't12', type: 'taxi' as const, name: 'Uber', nameAr: 'أوبر', route: 'On-demand ride hailing', fare: 25, duration: 'On demand', icon: '🚗' },
+  { id: 't13', type: 'taxi' as const, name: 'Careem', nameAr: 'كريم', route: 'On-demand ride hailing', fare: 22, duration: 'On demand', icon: '🚕' },
+  { id: 't14', type: 'rental' as const, name: 'Budget Car Rental', nameAr: 'بادجت لتأجير السيارات', route: 'Economy from SAR 120/day', fare: 120, duration: 'Per day', icon: '🚙' },
+  { id: 't15', type: 'rental' as const, name: 'Hertz Saudi', nameAr: 'هيرتز السعودية', route: 'Premium from SAR 250/day', fare: 250, duration: 'Per day', icon: '🚙' },
+  { id: 't16', type: 'rental' as const, name: 'Luxury Car Rental', nameAr: 'تأجير سيارات فاخرة', route: 'Range Rover, Mercedes, BMW from SAR 800/day', fare: 800, duration: 'Per day', icon: '🏎️' },
+];
