@@ -101,29 +101,12 @@ export default function HotelDetailScreen() {
           </TouchableOpacity>
           <Button
             title="Book Now"
-          onPress={() => {
-            const room = hotel.roomTypes.find((r) => r.name === selectedRoom);
-            const price = room?.price ?? hotel.pricePerNight;
-            if (balance < price) {
-              Alert.alert('Insufficient Balance', `You need ${formatCurrency(price)} but your balance is ${formatCurrency(balance)}.\n\nPlease top up your wallet first.`, [{ text: 'OK' }]);
-              return;
-            }
-            addTransaction({
-              id: `txn_${Date.now()}`,
-              type: 'payment',
-              amount: -price,
-              currency: 'SAR',
-              description: `${hotel.name} - ${selectedRoom}`,
-              date: new Date().toISOString(),
-              category: 'accommodation',
-              merchantLogo: '',
-            });
-            Alert.alert(
-              'Booking Confirmed!',
-              `Your room at ${hotel.name} has been booked!\n\nGuest: ${user?.name ?? 'Guest'}\nRoom: ${selectedRoom}\nPrice: ${formatCurrency(price)} / night\nLocation: ${hotel.city}\n\n${formatCurrency(price)} deducted from wallet.`,
-              [{ text: 'OK', onPress: () => navigation.goBack() }]
-            );
-          }}
+            onPress={() => {
+              navigation.navigate('HotelReservation', {
+                hotelId: hotel.id,
+                roomName: selectedRoom,
+              });
+            }}
             size="lg"
             disabled={!selectedRoom}
           />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,12 +6,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  RefreshControl,
+  Animated,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { colors, typography, spacing, borderRadius, shadows } from '../../constants/theme';
+import { SCREEN_WIDTH } from '../../constants/layout';
 import { useAuthStore } from '../../store/useAuthStore';
 import { attractions } from '../../services/mockData/attractions';
 
@@ -24,13 +29,37 @@ const CATS = [
   { id: '6', icon: '🛍️', label: 'Shopping',  tab: 'ExploreTab', route: 'Shopping' as string | undefined },
 ];
 
+const FEATURED_CARD_WIDTH = SCREEN_WIDTH - spacing.md * 2;
+
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
   const user = useAuthStore((s) => s.user);
   const login = useAuthStore((s) => s.login);
 
+  // Vertical scroll: pull-to-refresh + scroll-to-top FAB
+  const scrollRef = useRef<ScrollView>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Horizontal scroll: featured experiences pagination
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => setRefreshing(false), 1200);
+  }, []);
+
+  const onScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    setShowScrollTop(e.nativeEvent.contentOffset.y > 300);
+  }, []);
+
+  const scrollToTop = useCallback(() => {
+    scrollRef.current?.scrollTo({ y: 0, animated: true });
+  }, []);
+
   React.useEffect(() => { if (!user) login('demo', 'demo'); }, []);
 
+  const featuredExperiences = attractions.filter((a) => a.isFeatured).slice(0, 5);
   const popularDestinations = attractions.filter((a) => a.isFeatured).slice(0, 6);
   const recommended = attractions.filter((a) => a.isFeatured).slice(0, 4);
   const leftRec  = recommended.filter((_, i) => i % 2 === 0);
@@ -41,7 +70,15 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        ref={scrollRef}
+        showsVerticalScrollIndicator={false}
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.primary} colors={[colors.primary]} />
+        }
+      >
 
         {/* ── Header ──────────────────────────────────────────────────── */}
         <View style={styles.header}>
@@ -70,6 +107,56 @@ export default function HomeScreen() {
             <Text style={styles.searchFilterIcon}>⚙️</Text>
           </View>
         </TouchableOpacity>
+
+        {/* ── Featured Experiences (Horizontal Scroll) ────────────────── */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Featured Experiences</Text>
+          <TouchableOpacity onPress={() => navigation.getParent()?.navigate('ExploreTab')}>
+            <Text style={styles.seeAll}>See All</Text>
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={featuredExperiences}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={FEATURED_CARD_WIDTH + spacing.sm}
+          decelerationRate="fast"
+          contentContainerStyle={styles.featuredList}
+          keyExtractor={(item) => `feat_${item.id}`}
+          onScroll={(e) => {
+            const idx = Math.round(e.nativeEvent.contentOffset.x / (FEATURED_CARD_WIDTH + spacing.sm));
+            setFeaturedIndex(idx);
+          }}
+          scrollEventThrottle={16}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.featuredCard}
+              activeOpacity={0.9}
+              onPress={() => goToDetail(item.id)}
+            >
+              <Image source={{ uri: item.images[0] }} style={StyleSheet.absoluteFillObject} contentFit="cover" transition={300} />
+              <LinearGradient colors={['transparent', 'rgba(5,31,31,0.85)']} style={styles.featuredOverlay}>
+                <View style={styles.featuredBadge}>
+                  <Text style={styles.featuredBadgeText}>⭐ Featured</Text>
+                </View>
+                <Text style={styles.featuredName} numberOfLines={2}>{item.name}</Text>
+                <View style={styles.featuredMeta}>
+                  <Text style={styles.featuredCity}>📍 {item.city}</Text>
+                  <Text style={styles.featuredPrice}>
+                    {item.price === 0 ? 'Free Entry' : `SAR ${item.price}`}
+                  </Text>
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
+          )}
+        />
+        {/* Pagination dots */}
+        <View style={styles.dotsRow}>
+          {featuredExperiences.map((_, i) => (
+            <View key={i} style={[styles.dot, featuredIndex === i && styles.dotActive]} />
+          ))}
+        </View>
 
         {/* ── Category Row ────────────────────────────────────────────── */}
         <View style={styles.sectionHeader}>
@@ -162,6 +249,13 @@ export default function HomeScreen() {
 
         <View style={{ height: 100 }} />
       </ScrollView>
+
+      {/* Scroll-to-top FAB */}
+      {showScrollTop && (
+        <TouchableOpacity style={styles.scrollTopFab} onPress={scrollToTop} activeOpacity={0.8}>
+          <Text style={styles.scrollTopIcon}>↑</Text>
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 }
@@ -256,6 +350,42 @@ const styles = StyleSheet.create({
   },
   recCardName: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.white, lineHeight: 17 },
   recCardPrice: { fontSize: 10, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
+
+  // Featured Experiences (horizontal snap cards)
+  featuredList: { paddingHorizontal: spacing.md, gap: spacing.sm },
+  featuredCard: {
+    width: FEATURED_CARD_WIDTH, height: 200,
+    borderRadius: borderRadius.xl, overflow: 'hidden',
+    backgroundColor: colors.pearl,
+    ...shadows.md,
+  },
+  featuredOverlay: {
+    position: 'absolute', bottom: 0, left: 0, right: 0,
+    paddingHorizontal: spacing.md, paddingBottom: spacing.md, paddingTop: spacing.xxl,
+  },
+  featuredBadge: {
+    backgroundColor: 'rgba(200,168,75,0.9)', borderRadius: borderRadius.full,
+    paddingVertical: 3, paddingHorizontal: spacing.sm, alignSelf: 'flex-start', marginBottom: spacing.xs,
+  },
+  featuredBadgeText: { fontSize: 10, fontWeight: '700', color: colors.white },
+  featuredName: { fontSize: typography.sizes.lg, fontWeight: '800', color: colors.white, lineHeight: 22 },
+  featuredMeta: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: spacing.xs },
+  featuredCity: { fontSize: typography.sizes.sm, color: 'rgba(255,255,255,0.85)' },
+  featuredPrice: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.sand },
+
+  // Pagination dots
+  dotsRow: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: spacing.sm },
+  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.pearl, marginHorizontal: 3 },
+  dotActive: { width: 20, backgroundColor: colors.primary },
+
+  // Scroll-to-top FAB
+  scrollTopFab: {
+    position: 'absolute', bottom: 100, right: spacing.md,
+    width: 44, height: 44, borderRadius: 22,
+    backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center',
+    ...shadows.md,
+  },
+  scrollTopIcon: { fontSize: 20, fontWeight: '700', color: colors.white },
 
   // Places to Visit
   placeList: { paddingHorizontal: spacing.md, gap: spacing.sm, paddingBottom: spacing.sm },

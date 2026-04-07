@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useMemo, useRef, useCallback } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -16,6 +16,18 @@ export default function ExploreScreen() {
   const navigation = useNavigation<any>();
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState<Filter>('All');
+  const flatListRef = useRef<FlatList>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => setRefreshing(false), 1200);
+  }, []);
+
+  const scrollToTop = useCallback(() => {
+    flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+  }, []);
 
   const filtered = useMemo(() => {
     let items = attractions;
@@ -65,12 +77,18 @@ export default function ExploreScreen() {
 
       {/* 2-column overlay card grid */}
       <FlatList
+        ref={flatListRef}
         data={filtered}
         keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={styles.grid}
         columnWrapperStyle={styles.gridRow}
         showsVerticalScrollIndicator={false}
+        onScroll={(e) => setShowScrollTop(e.nativeEvent.contentOffset.y > 300)}
+        scrollEventThrottle={16}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.primary} colors={[colors.primary]} />
+        }
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
@@ -109,6 +127,13 @@ export default function ExploreScreen() {
           </View>
         }
       />
+
+      {/* Scroll-to-top FAB */}
+      {showScrollTop && (
+        <TouchableOpacity style={styles.scrollTopFab} onPress={scrollToTop} activeOpacity={0.8}>
+          <Text style={styles.scrollTopIcon}>↑</Text>
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 }
@@ -179,6 +204,15 @@ const styles = StyleSheet.create({
   featuredText: { fontSize: 9, fontWeight: '700', color: colors.white },
   cardName: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.white, lineHeight: 17 },
   cardSub: { fontSize: 10, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
+
+  // Scroll-to-top FAB
+  scrollTopFab: {
+    position: 'absolute', bottom: 100, right: spacing.md,
+    width: 44, height: 44, borderRadius: 22,
+    backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center',
+    ...shadows.md,
+  },
+  scrollTopIcon: { fontSize: 20, fontWeight: '700', color: colors.white },
 
   // Empty
   empty: { alignItems: 'center', paddingTop: 60 },
