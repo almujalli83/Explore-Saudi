@@ -109,7 +109,16 @@ export default function HotelReservationScreen() {
     });
 
     setConfirmed(true);
+    setAssignedRoom(generatedRoom);
   };
+
+  // Generate a room number based on special requests (floor preference)
+  const [assignedRoom, setAssignedRoom] = useState('');
+  const generatedRoom = useMemo(() => {
+    const floor = selectedRequests.includes('High Floor') ? Math.floor(8 + Math.random() * 5) : Math.floor(2 + Math.random() * 6);
+    const unit = Math.floor(1 + Math.random() * 20).toString().padStart(2, '0');
+    return `${floor}${unit}`;
+  }, [selectedRequests]);
 
   if (!hotel || !room) {
     return (
@@ -128,7 +137,7 @@ export default function HotelReservationScreen() {
         <Card variant="elevated" style={styles.successCard}>
           <Text style={styles.successHotel}>{hotel.name}</Text>
           <Text style={styles.successDetail}>👤 {user?.name ?? 'Guest'}</Text>
-          <Text style={styles.successDetail}>🏨 {roomName}</Text>
+          <Text style={styles.successDetail}>🏨 {roomName} • Room {assignedRoom}</Text>
           <Text style={styles.successDetail}>📅 {checkInDate} → {checkOutDate}</Text>
           <Text style={styles.successDetail}>🌙 {nights} night{nights > 1 ? 's' : ''}</Text>
           <Text style={styles.successDetail}>👥 {guests} guest{guests > 1 ? 's' : ''}</Text>
@@ -144,7 +153,7 @@ export default function HotelReservationScreen() {
             title="🏨 Digital Check-In"
             onPress={() => navigation.navigate('DigitalCheckIn', {
               hotelName: hotel.name,
-              roomNumber: '1204',
+              roomNumber: assignedRoom,
               checkIn: checkInDate,
               checkOut: checkOutDate,
             })}

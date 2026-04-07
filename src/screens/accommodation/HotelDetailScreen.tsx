@@ -90,12 +90,21 @@ export default function HotelDetailScreen() {
         <View style={styles.bottomActions}>
           <TouchableOpacity
             style={styles.checkInBtn}
-            onPress={() => navigation.navigate('DigitalCheckIn', {
-              hotelName: hotel.name,
-              roomNumber: selectedRoom ? '1204' : '1001',
-              checkIn: '2026-04-10',
-              checkOut: '2026-04-14',
-            })}
+            onPress={() => {
+              const floor = Math.floor(2 + Math.random() * 10);
+              const unit = Math.floor(1 + Math.random() * 20).toString().padStart(2, '0');
+              const today = new Date();
+              const checkIn = today.toISOString().split('T')[0];
+              const out = new Date(today);
+              out.setDate(out.getDate() + 3);
+              const checkOut = out.toISOString().split('T')[0];
+              navigation.navigate('DigitalCheckIn', {
+                hotelName: hotel.name,
+                roomNumber: `${floor}${unit}`,
+                checkIn,
+                checkOut,
+              });
+            }}
           >
             <Text style={styles.checkInBtnText}>🏨 Check In</Text>
           </TouchableOpacity>
