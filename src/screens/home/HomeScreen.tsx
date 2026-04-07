@@ -429,7 +429,7 @@ const styles = StyleSheet.create({
   // Featured Experiences (horizontal snap cards)
   featuredList: { paddingHorizontal: spacing.md, gap: spacing.sm },
   featuredCard: {
-    width: FEATURED_CARD_WIDTH, height: 200,
+    width: FEATURED_CARD_WIDTH, height: 150,
     borderRadius: borderRadius.xl, overflow: 'hidden',
     backgroundColor: colors.pearl,
     ...shadows.md,
