@@ -79,6 +79,7 @@ export default function AttractionDetailScreen() {
         {/* ── Tabs ─────────────────────────────────────────────────── */}
         <ScrollView
           horizontal
+          nestedScrollEnabled
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tabRow}
         >

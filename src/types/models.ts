@@ -169,3 +169,31 @@ export interface Transport {
   fare: number;
   duration: string;
 }
+
+export interface Booking {
+  id: string;
+  hotelName: string;
+  roomType: string;
+  checkIn: string;
+  checkOut: string;
+  guestName: string;
+  confirmationCode: string;
+  status: 'upcoming' | 'active' | 'completed' | 'cancelled';
+}
+
+export interface Document {
+  id: string;
+  type: 'passport' | 'driver_license' | 'visa' | 'insurance' | 'boarding_pass';
+  title: string;
+  number: string;
+  issuedDate: string;
+  expiryDate: string;
+  country: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  text: string;
+  sender: 'user' | 'bot';
+  timestamp: string;
+}

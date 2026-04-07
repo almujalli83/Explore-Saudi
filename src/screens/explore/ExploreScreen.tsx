@@ -29,16 +29,6 @@ export default function ExploreScreen() {
     return items;
   }, [activeFilter, search]);
 
-  const EXPLORE_SECTIONS = [
-    { id: 'ent', icon: '🎭', label: 'Entertainment', route: 'Entertainment' },
-    { id: 'din', icon: '🍽️', label: 'Dining', route: 'Dining' },
-    { id: 'shop', icon: '🛍️', label: 'Shopping', route: 'Shopping' },
-    { id: 'hotel', icon: '🏨', label: 'Hotels', route: 'Accommodation' },
-    { id: 'prayer', icon: '🕌', label: 'Prayer Times', route: 'PrayerTimes' },
-    { id: 'culture', icon: '📖', label: 'Culture', route: 'CulturalGuide' },
-    { id: 'ai', icon: '🤖', label: 'AI Planner', route: 'AITripPlanner' },
-  ];
-
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       {/* Header */}
@@ -59,16 +49,6 @@ export default function ExploreScreen() {
           <Text style={styles.filterIconText}>⚙️</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Explore section chips (horizontal scroll) */}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.sectionsRow}>
-        {EXPLORE_SECTIONS.map((s) => (
-          <TouchableOpacity key={s.id} style={styles.sectionChip} onPress={() => navigation.navigate(s.route)}>
-            <Text style={styles.sectionIcon}>{s.icon}</Text>
-            <Text style={styles.sectionLabel}>{s.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
 
       {/* Filter pills: All / Popular / Recommended / Rating */}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filterRow}>
@@ -155,16 +135,6 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   filterIconText: { fontSize: 18 },
-
-  // Explore section chips
-  sectionsRow: { paddingHorizontal: spacing.md, paddingBottom: spacing.sm, gap: spacing.sm },
-  sectionChip: {
-    flexDirection: 'row', alignItems: 'center',
-    backgroundColor: colors.pearl, borderRadius: borderRadius.full,
-    paddingVertical: spacing.xs + 2, paddingHorizontal: spacing.sm + 4,
-  },
-  sectionIcon: { fontSize: 15, marginRight: spacing.xs },
-  sectionLabel: { fontSize: typography.sizes.sm, color: colors.charcoal, fontWeight: '500' },
 
   // Filter pills
   filterRow: { paddingHorizontal: spacing.md, paddingBottom: spacing.sm, gap: spacing.sm },
