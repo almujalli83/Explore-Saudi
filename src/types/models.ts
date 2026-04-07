@@ -183,7 +183,7 @@ export interface Booking {
 
 export interface Document {
   id: string;
-  type: 'passport' | 'visa' | 'insurance' | 'boarding_pass';
+  type: 'passport' | 'driver_license' | 'visa' | 'insurance' | 'boarding_pass';
   title: string;
   number: string;
   issuedDate: string;

@@ -141,6 +141,7 @@ export default function HomeScreen() {
         <FlatList
           data={popularDestinations}
           horizontal
+          nestedScrollEnabled
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.placeList}
           keyExtractor={(item) => item.id}
