@@ -1,8 +1,9 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-export const SCREEN_WIDTH = width;
+// On web, Dimensions returns the full browser window width; cap to mobile viewport
+export const SCREEN_WIDTH = Platform.OS === 'web' ? Math.min(width, 430) : width;
 export const SCREEN_HEIGHT = height;
 export const IS_SMALL_DEVICE = width < 375;
 
