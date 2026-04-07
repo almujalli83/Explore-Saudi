@@ -157,9 +157,9 @@ export const attractions: Attraction[] = [
       'A futuristic mega-development spanning 1.6 million square meters in northern Riyadh featuring striking contemporary architecture. KAFD serves as the kingdom\'s financial hub with towers, conference centers, and landscaped plazas. The district includes the iconic KAFD Grand Mosque with its geometric design.',
     category: 'modern',
     images: [
-      'https://upload.wikimedia.org/wikipedia/commons/3/32/KAFD_January_2025.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/c/c3/KAFD_Grand_Mosque.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/7/7e/The_king_Abdullah_Financial_District..JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/KAFD_January_2025.jpg/800px-KAFD_January_2025.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/KAFD_seen_from_North_east_side_of_Riyadh_City.jpg/800px-KAFD_seen_from_North_east_side_of_Riyadh_City.jpg',
+      'https://upload.wikimedia.org/wikipedia/en/thumb/b/b2/Kingdom_Centre_Riyadh_2024.jpeg/800px-Kingdom_Centre_Riyadh_2024.jpeg',
     ],
     rating: 4.4,
     reviewCount: 2150,
@@ -423,7 +423,7 @@ export const attractions: Attraction[] = [
     images: [
       'https://upload.wikimedia.org/wikipedia/en/thumb/7/78/King_Abdulaziz_Center_for_World_Culture_%28Ithra%29_%28cropped%29.png/800px-King_Abdulaziz_Center_for_World_Culture_%28Ithra%29_%28cropped%29.png',
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/National_Museum_Riyadh_%286781666263%29.jpg/800px-National_Museum_Riyadh_%286781666263%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/8/8a/Aramco_Tower.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/KAFD_January_2025.jpg/800px-KAFD_January_2025.jpg',
     ],
     rating: 4.7,
     reviewCount: 4560,

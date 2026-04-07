@@ -108,6 +108,33 @@ export default function HomeScreen() {
           </View>
         </TouchableOpacity>
 
+        {/* ── Visa & Travel Package ──────────────────────────────────── */}
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={() => navigation.getParent()?.navigate('ServicesTab', { screen: 'VisaPackage' })}
+        >
+          <LinearGradient
+            colors={['#0b4f4a', '#1a8a6e']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.visaCard}
+          >
+            <View style={styles.visaCardContent}>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.visaCardBadge}>🛂  Tourist Visa</Text>
+                <Text style={styles.visaCardTitle}>Visa & Travel Package</Text>
+                <Text style={styles.visaCardDesc}>
+                  Tourist Visa + Hotel + Flight from SAR 2,499
+                </Text>
+                <View style={styles.visaCardBtn}>
+                  <Text style={styles.visaCardBtnText}>Apply Now →</Text>
+                </View>
+              </View>
+              <Text style={styles.visaCardEmoji}>✈️</Text>
+            </View>
+          </LinearGradient>
+        </TouchableOpacity>
+
         {/* ── Featured Experiences (Horizontal Scroll) ────────────────── */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Featured Experiences</Text>
@@ -118,6 +145,7 @@ export default function HomeScreen() {
         <FlatList
           data={featuredExperiences}
           horizontal
+          nestedScrollEnabled
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           snapToInterval={FEATURED_CARD_WIDTH + spacing.sm}
@@ -305,6 +333,53 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary, alignItems: 'center', justifyContent: 'center',
   },
   searchFilterIcon: { fontSize: 13 },
+
+  // Visa & Package card
+  visaCard: {
+    marginHorizontal: spacing.md,
+    marginBottom: spacing.lg,
+    borderRadius: borderRadius.lg,
+    padding: spacing.md,
+    ...shadows.medium,
+  },
+  visaCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  visaCardBadge: {
+    fontSize: 12,
+    color: '#a8e6cf',
+    fontWeight: '600' as const,
+    marginBottom: 4,
+    letterSpacing: 0.5,
+  },
+  visaCardTitle: {
+    fontSize: 20,
+    fontWeight: '700' as const,
+    color: '#fff',
+    marginBottom: 4,
+  },
+  visaCardDesc: {
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.85)',
+    marginBottom: 12,
+  },
+  visaCardBtn: {
+    backgroundColor: '#c8a84b',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  visaCardBtnText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '700' as const,
+  },
+  visaCardEmoji: {
+    fontSize: 48,
+    marginLeft: spacing.sm,
+  },
 
   // Section headers
   sectionHeader: {

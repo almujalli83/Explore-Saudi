@@ -1,138 +1,15 @@
-import React, { useState } from 'react';
-import {
-  View, Text, ScrollView, StyleSheet, TouchableOpacity,
-  ActivityIndicator, Alert, Platform, Image as RNImage,
-} from 'react-native';
+import React from 'react';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Header from '../../components/common/Header';
 import Card from '../../components/common/Card';
-import { colors, gradients, typography, spacing, borderRadius, shadows } from '../../constants/theme';
+import { colors, gradients, typography, spacing, borderRadius } from '../../constants/theme';
 import { useAuthStore } from '../../store/useAuthStore';
 
-type DocType = 'passport' | 'driver_license';
-
 export default function DigitalIDScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const user = useAuthStore((s) => s.user);
-
-  // Upload state for passport & driver license
-  const [uploadedImages, setUploadedImages] = useState<Partial<Record<DocType, string>>>({});
-  const [uploading, setUploading] = useState<DocType | null>(null);
-  const [verified, setVerified] = useState<Partial<Record<DocType, boolean>>>({});
-
-  const pickDocument = (docType: DocType) => {
-    if (Platform.OS === 'web') {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*,.pdf';
-      input.onchange = (e: any) => {
-        const file = e.target.files?.[0];
-        if (file) {
-          const uri = URL.createObjectURL(file);
-          simulateUpload(docType, uri);
-        }
-      };
-      input.click();
-    } else {
-      // Mobile: simulate camera/gallery capture
-      simulateUpload(docType, 'mock://captured');
-    }
-  };
-
-  const simulateUpload = (docType: DocType, uri: string) => {
-    setUploading(docType);
-    setTimeout(() => {
-      setUploadedImages((prev) => ({ ...prev, [docType]: uri }));
-      setUploading(null);
-      // Simulate verification after upload
-      setTimeout(() => {
-        setVerified((prev) => ({ ...prev, [docType]: true }));
-        Alert.alert('Verified', `Your ${docType === 'passport' ? 'passport' : "driver's license"} has been verified successfully.`);
-      }, 1000);
-    }, 1500);
-  };
-
-  const removeDocument = (docType: DocType) => {
-    Alert.alert('Remove Document', 'Are you sure you want to remove this document?', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Remove',
-        style: 'destructive',
-        onPress: () => {
-          setUploadedImages((prev) => ({ ...prev, [docType]: undefined }));
-          setVerified((prev) => ({ ...prev, [docType]: false }));
-        },
-      },
-    ]);
-  };
-
-  const getVerificationStatus = (docType: DocType) => {
-    if (verified[docType]) return { label: 'Verified', color: colors.success, icon: '✅' };
-    if (uploadedImages[docType]) return { label: 'Pending', color: colors.warning, icon: '⏳' };
-    return { label: 'Not Uploaded', color: colors.slate, icon: '⚪' };
-  };
-
-  const renderUploadSection = (docType: DocType, title: string, icon: string) => {
-    const uploadedUri = uploadedImages[docType];
-    const isUploading = uploading === docType;
-    const status = getVerificationStatus(docType);
-
-    return (
-      <View style={styles.uploadSection}>
-        <View style={styles.uploadHeader}>
-          <Text style={styles.uploadTitle}>{icon} {title}</Text>
-          <View style={[styles.statusBadge, { backgroundColor: status.color + '20' }]}>
-            <Text style={styles.statusIcon}>{status.icon}</Text>
-            <Text style={[styles.statusLabel, { color: status.color }]}>{status.label}</Text>
-          </View>
-        </View>
-
-        {uploadedUri ? (
-          <View style={styles.uploadedWrap}>
-            {Platform.OS === 'web' ? (
-              <RNImage source={{ uri: uploadedUri }} style={styles.uploadedImg} resizeMode="cover" />
-            ) : (
-              <View style={styles.uploadedMock}>
-                <Text style={styles.uploadedMockIcon}>{icon}</Text>
-                <Text style={styles.uploadedMockText}>Document captured</Text>
-              </View>
-            )}
-            <View style={styles.uploadedActions}>
-              <TouchableOpacity style={styles.replaceBtn} onPress={() => pickDocument(docType)}>
-                <Text style={styles.replaceBtnText}>📷  Replace</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.removeBtn} onPress={() => removeDocument(docType)}>
-                <Text style={styles.removeBtnText}>🗑️  Remove</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : (
-          <TouchableOpacity
-            style={styles.uploadBox}
-            onPress={() => pickDocument(docType)}
-            activeOpacity={0.8}
-            disabled={isUploading}
-          >
-            {isUploading ? (
-              <>
-                <ActivityIndicator color={colors.primary} size="large" />
-                <Text style={styles.uploadingText}>Uploading…</Text>
-              </>
-            ) : (
-              <>
-                <Text style={styles.uploadIcon}>📤</Text>
-                <Text style={styles.uploadLabel}>Upload {title}</Text>
-                <Text style={styles.uploadSub}>
-                  Tap to {Platform.OS === 'web' ? 'choose a file' : 'take a photo or pick from gallery'}
-                </Text>
-              </>
-            )}
-          </TouchableOpacity>
-        )}
-      </View>
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -174,33 +51,39 @@ export default function DigitalIDScreen() {
           </View>
         </LinearGradient>
 
-        {/* Verification Summary */}
-        <Card variant="elevated" style={styles.verificationCard}>
-          <Text style={styles.verificationTitle}>🛡️ ID Verification Status</Text>
-          <View style={styles.verificationRow}>
-            <Text style={styles.verificationDoc}>Passport</Text>
-            <View style={[styles.verificationBadge, { backgroundColor: getVerificationStatus('passport').color + '20' }]}>
-              <Text style={{ fontSize: 12 }}>{getVerificationStatus('passport').icon}</Text>
-              <Text style={[styles.verificationLabel, { color: getVerificationStatus('passport').color }]}>
-                {getVerificationStatus('passport').label}
-              </Text>
+        {/* Quick Status */}
+        <Card variant="elevated" style={styles.statusCard}>
+          <Text style={styles.statusTitle}>🛡️ Verification Status</Text>
+          <View style={styles.statusRow}>
+            <Text style={styles.statusDoc}>Passport</Text>
+            <View style={[styles.statusBadge, { backgroundColor: colors.success + '20' }]}>
+              <Text style={{ fontSize: 12 }}>✅</Text>
+              <Text style={[styles.statusLabel, { color: colors.success }]}>Verified</Text>
             </View>
           </View>
-          <View style={styles.verificationDivider} />
-          <View style={styles.verificationRow}>
-            <Text style={styles.verificationDoc}>Driver's License</Text>
-            <View style={[styles.verificationBadge, { backgroundColor: getVerificationStatus('driver_license').color + '20' }]}>
-              <Text style={{ fontSize: 12 }}>{getVerificationStatus('driver_license').icon}</Text>
-              <Text style={[styles.verificationLabel, { color: getVerificationStatus('driver_license').color }]}>
-                {getVerificationStatus('driver_license').label}
-              </Text>
+          <View style={styles.statusDivider} />
+          <View style={styles.statusRow}>
+            <Text style={styles.statusDoc}>Driver's License</Text>
+            <View style={[styles.statusBadge, { backgroundColor: colors.success + '20' }]}>
+              <Text style={{ fontSize: 12 }}>✅</Text>
+              <Text style={[styles.statusLabel, { color: colors.success }]}>Verified</Text>
             </View>
           </View>
         </Card>
 
-        {/* Upload Sections */}
-        {renderUploadSection('passport', 'Passport', '🛂')}
-        {renderUploadSection('driver_license', "Driver's License", '🪪')}
+        {/* Manage Documents Button */}
+        <TouchableOpacity
+          style={styles.manageBtn}
+          activeOpacity={0.85}
+          onPress={() => navigation.getParent()?.navigate('ProfileTab', { screen: 'DigitalDocuments' })}
+        >
+          <Text style={styles.manageBtnIcon}>📄</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.manageBtnTitle}>Manage Documents</Text>
+            <Text style={styles.manageBtnSub}>Upload or update passport, license & more</Text>
+          </View>
+          <Text style={styles.manageBtnArrow}>→</Text>
+        </TouchableOpacity>
 
         {/* Info Cards */}
         <Card variant="outlined" style={styles.infoCard}>
@@ -252,61 +135,26 @@ const styles = StyleSheet.create({
   },
   qrText: { fontSize: typography.sizes.xl, fontWeight: '700', color: colors.charcoal },
 
-  // Verification card
-  verificationCard: { padding: spacing.md, marginBottom: spacing.lg },
-  verificationTitle: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.charcoal, marginBottom: spacing.sm },
-  verificationRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: spacing.xs },
-  verificationDoc: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.charcoal },
-  verificationBadge: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.sm, paddingVertical: 4, borderRadius: borderRadius.full },
-  verificationLabel: { fontSize: typography.sizes.xs, fontWeight: '600', marginLeft: 4 },
-  verificationDivider: { height: 1, backgroundColor: colors.pearl, marginVertical: spacing.xs },
-
-  // Upload sections
-  uploadSection: { marginBottom: spacing.lg },
-  uploadHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.sm },
-  uploadTitle: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.charcoal },
+  // Status card
+  statusCard: { padding: spacing.md, marginBottom: spacing.lg },
+  statusTitle: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.charcoal, marginBottom: spacing.sm },
+  statusRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: spacing.xs },
+  statusDoc: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.charcoal },
   statusBadge: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.sm, paddingVertical: 4, borderRadius: borderRadius.full },
-  statusIcon: { fontSize: 12 },
   statusLabel: { fontSize: typography.sizes.xs, fontWeight: '600', marginLeft: 4 },
+  statusDivider: { height: 1, backgroundColor: colors.pearl, marginVertical: spacing.xs },
 
-  // Upload box
-  uploadBox: {
-    borderWidth: 2, borderStyle: 'dashed', borderColor: colors.primary,
-    borderRadius: borderRadius.lg, padding: spacing.xl,
-    alignItems: 'center', backgroundColor: colors.pearl + '40',
+  // Manage Documents button
+  manageBtn: {
+    flexDirection: 'row', alignItems: 'center',
+    backgroundColor: colors.primary + '10', borderRadius: borderRadius.lg,
+    padding: spacing.md, marginBottom: spacing.lg,
+    borderWidth: 1.5, borderColor: colors.primary + '30',
   },
-  uploadIcon: { fontSize: 40, marginBottom: spacing.sm },
-  uploadLabel: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.charcoal, marginBottom: spacing.xs },
-  uploadSub: { fontSize: typography.sizes.sm, color: colors.slate, textAlign: 'center' },
-  uploadingText: { fontSize: typography.sizes.sm, color: colors.slate, marginTop: spacing.sm },
-
-  // Uploaded document preview
-  uploadedWrap: {
-    borderRadius: borderRadius.lg, overflow: 'hidden',
-    backgroundColor: colors.white, ...shadows.sm,
-  },
-  uploadedImg: { width: '100%', height: 180 },
-  uploadedMock: {
-    height: 140, backgroundColor: '#e8f0fb',
-    alignItems: 'center', justifyContent: 'center',
-  },
-  uploadedMockIcon: { fontSize: 48, marginBottom: spacing.xs },
-  uploadedMockText: { fontSize: typography.sizes.sm, color: colors.slate, fontWeight: '600' },
-  uploadedActions: {
-    flexDirection: 'row', gap: spacing.sm, padding: spacing.sm,
-  },
-  replaceBtn: {
-    flex: 1, paddingVertical: spacing.sm,
-    borderRadius: borderRadius.md, borderWidth: 1.5, borderColor: colors.primary,
-    alignItems: 'center',
-  },
-  replaceBtnText: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.primary },
-  removeBtn: {
-    flex: 1, paddingVertical: spacing.sm,
-    borderRadius: borderRadius.md, borderWidth: 1.5, borderColor: colors.error,
-    alignItems: 'center',
-  },
-  removeBtnText: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.error },
+  manageBtnIcon: { fontSize: 28, marginRight: spacing.sm },
+  manageBtnTitle: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.charcoal },
+  manageBtnSub: { fontSize: typography.sizes.xs, color: colors.slate, marginTop: 2 },
+  manageBtnArrow: { fontSize: 20, color: colors.primary, fontWeight: '700' },
 
   // Info cards
   infoCard: { flexDirection: 'row', padding: spacing.md, marginBottom: spacing.sm, alignItems: 'center' },
