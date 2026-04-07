@@ -7,6 +7,7 @@ import ReviewsScreen from '../screens/profile/ReviewsScreen';
 import ShareExperienceScreen from '../screens/profile/ShareExperienceScreen';
 import PhotoSpotsScreen from '../screens/profile/PhotoSpotsScreen';
 import SettingsScreen from '../screens/profile/SettingsScreen';
+import RegistrationScreen from '../screens/auth/RegistrationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function ProfileStack() {
       <Stack.Screen name="ShareExperience" component={ShareExperienceScreen} />
       <Stack.Screen name="PhotoSpots" component={PhotoSpotsScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="Registration" component={RegistrationScreen} />
     </Stack.Navigator>
   );
 }

@@ -13,7 +13,7 @@ import { useAuthStore } from '../../store/useAuthStore';
 import { formatCurrency } from '../../utils/formatters';
 
 export default function HotelDetailScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const route = useRoute<any>();
   const hotel = hotels.find((h) => h.id === route.params?.id);
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
@@ -87,8 +87,20 @@ export default function HotelDetailScreen() {
           <PriceBadge price={hotel.pricePerNight} size="lg" />
           <Text style={styles.bottomPerNight}>per night</Text>
         </View>
-        <Button
-          title="Book Now"
+        <View style={styles.bottomActions}>
+          <TouchableOpacity
+            style={styles.checkInBtn}
+            onPress={() => navigation.navigate('DigitalCheckIn', {
+              hotelName: hotel.name,
+              roomNumber: selectedRoom ? '1204' : '1001',
+              checkIn: '2026-04-10',
+              checkOut: '2026-04-14',
+            })}
+          >
+            <Text style={styles.checkInBtnText}>🏨 Check In</Text>
+          </TouchableOpacity>
+          <Button
+            title="Book Now"
           onPress={() => {
             const room = hotel.roomTypes.find((r) => r.name === selectedRoom);
             const price = room?.price ?? hotel.pricePerNight;
@@ -112,9 +124,10 @@ export default function HotelDetailScreen() {
               [{ text: 'OK', onPress: () => navigation.goBack() }]
             );
           }}
-          size="lg"
-          disabled={!selectedRoom}
-        />
+            size="lg"
+            disabled={!selectedRoom}
+          />
+        </View>
       </View>
     </View>
   );
@@ -161,4 +174,11 @@ const styles = StyleSheet.create({
   },
   bottomLabel: { fontSize: typography.sizes.xs, color: colors.slate },
   bottomPerNight: { fontSize: typography.sizes.xs, color: colors.slate },
+  bottomActions: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  checkInBtn: {
+    borderWidth: 1.5, borderColor: colors.primary, borderRadius: borderRadius.lg,
+    paddingVertical: 10, paddingHorizontal: spacing.md,
+    alignItems: 'center', justifyContent: 'center',
+  },
+  checkInBtnText: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.primary },
 });

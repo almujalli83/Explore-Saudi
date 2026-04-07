@@ -14,6 +14,7 @@ import ShoppingScreen from '../screens/shopping/ShoppingScreen';
 import MallDetailScreen from '../screens/shopping/MallDetailScreen';
 import AccommodationScreen from '../screens/accommodation/AccommodationScreen';
 import HotelDetailScreen from '../screens/accommodation/HotelDetailScreen';
+import DigitalCheckInScreen from '../screens/accommodation/DigitalCheckInScreen';
 import AITripPlannerScreen from '../screens/explore/AITripPlannerScreen';
 import PrayerTimesScreen from '../screens/explore/PrayerTimesScreen';
 import CulturalGuideScreen from '../screens/explore/CulturalGuideScreen';
@@ -38,6 +39,7 @@ export default function ExploreStack() {
       <Stack.Screen name="MallDetail" component={MallDetailScreen} />
       <Stack.Screen name="Accommodation" component={AccommodationScreen} />
       <Stack.Screen name="HotelDetail" component={HotelDetailScreen} />
+      <Stack.Screen name="DigitalCheckIn" component={DigitalCheckInScreen} />
       <Stack.Screen name="AITripPlanner" component={AITripPlannerScreen} />
       <Stack.Screen name="PrayerTimes" component={PrayerTimesScreen} />
       <Stack.Screen name="CulturalGuide" component={CulturalGuideScreen} />

@@ -38,7 +38,7 @@ const HIDDEN_TAB_SCREENS = new Set([
   'Transport', 'EmergencySOS', 'OfflineMaps', 'Insurance', 'LanguageHelper', 'VisaPackage',
   'DigitalID', 'Payment', 'CurrencyExchange', 'ExpenseTracker', 'LoyaltyCards', 'MyTickets',
   'MyBookings', 'NFTCollection', 'Reviews', 'ShareExperience', 'PhotoSpots', 'Settings',
-  'Notifications', 'SearchMain',
+  'Notifications', 'SearchMain', 'DigitalCheckIn', 'Registration',
 ]);
 
 function shouldHideTabBar(route: any): boolean {
