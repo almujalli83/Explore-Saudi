@@ -1,173 +1,268 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import ImageCarousel from '../../components/common/ImageCarousel';
-import Button from '../../components/common/Button';
-import RatingStars from '../../components/common/RatingStars';
 import PriceBadge from '../../components/common/PriceBadge';
-import Badge from '../../components/common/Badge';
 import { colors, typography, spacing, borderRadius, shadows } from '../../constants/theme';
+import { SCREEN_WIDTH } from '../../constants/layout';
 import { attractions } from '../../services/mockData/attractions';
 
+const TABS = ['Hotels', 'Restaurants', 'Activities'] as const;
+
 export default function AttractionDetailScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const route = useRoute<any>();
+  const [activeTab, setActiveTab] = useState<typeof TABS[number]>('Hotels');
+  const [expanded, setExpanded] = useState(false);
+
   const attraction = attractions.find((a) => a.id === route.params?.id);
 
   if (!attraction) {
     return (
-      <View style={styles.center}>
-        <Text>Attraction not found</Text>
-      </View>
+      <View style={styles.center}><Text>Attraction not found</Text></View>
     );
   }
+
+  const handleBook = () => {
+    Alert.alert(
+      attraction.price === 0 ? 'Directions' : 'Booking',
+      attraction.price === 0
+        ? `Opening Maps to ${attraction.name}...`
+        : `Book a ticket for ${attraction.name}?\nEntry: SAR ${attraction.price}`,
+      [{ text: 'OK' }]
+    );
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Image Carousel */}
-        <ImageCarousel images={attraction.images} height={300} autoPlay />
 
-        {/* Back Button Overlay */}
-        <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-          <Text style={styles.backIcon}>{'\u2190'}</Text>
-        </TouchableOpacity>
+        {/* ── Hero Image with overlay ───────────────────────────────── */}
+        <View style={styles.heroWrap}>
+          <Image
+            source={{ uri: attraction.images[0] }}
+            style={styles.heroImg}
+            contentFit="cover"
+            transition={200}
+          />
 
-        <View style={styles.content}>
-          {/* Title Section */}
-          <View style={styles.titleRow}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.name}>{attraction.name}</Text>
-              <Text style={styles.nameAr}>{attraction.nameAr}</Text>
+          {/* Top action bar: back / share / heart */}
+          <View style={styles.heroActions}>
+            <TouchableOpacity style={styles.heroBtn} onPress={() => navigation.goBack()}>
+              <Text style={styles.heroBtnIcon}>←</Text>
+            </TouchableOpacity>
+            <View style={styles.heroActRight}>
+              <TouchableOpacity style={styles.heroBtn}>
+                <Text style={styles.heroBtnIcon}>⤴</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.heroBtn}>
+                <Text style={styles.heroBtnIcon}>♡</Text>
+              </TouchableOpacity>
             </View>
-            {attraction.isFeatured && <Badge text="Featured" variant="featured" />}
           </View>
 
-          {/* Meta */}
+          {/* Bottom overlay: name + city + rating chip */}
+          <LinearGradient
+            colors={['transparent', 'rgba(5,31,31,0.88)']}
+            style={styles.heroOverlay}
+          >
+            <Text style={styles.heroName}>{attraction.name}</Text>
+            <Text style={styles.heroCity}>{attraction.city}, Saudi Arabia</Text>
+            <View style={styles.heroRatingChip}>
+              <Text style={styles.heroRatingStar}>⭐</Text>
+              <Text style={styles.heroRatingNum}>{attraction.rating.toFixed(1)}</Text>
+            </View>
+          </LinearGradient>
+        </View>
+
+        {/* ── Tabs ─────────────────────────────────────────────────── */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.tabRow}
+        >
+          {TABS.map((t) => (
+            <TouchableOpacity
+              key={t}
+              style={[styles.tab, activeTab === t && styles.tabActive]}
+              onPress={() => setActiveTab(t)}
+            >
+              <Text style={[styles.tabText, activeTab === t && styles.tabTextActive]}>{t}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        {/* ── Photo Grid ───────────────────────────────────────────── */}
+        <View style={styles.photoGrid}>
+          <Image
+            source={{ uri: attraction.images[1] ?? attraction.images[0] }}
+            style={styles.photoLeft}
+            contentFit="cover"
+            transition={200}
+          />
+          <View style={styles.photoRightCol}>
+            <Image
+              source={{ uri: attraction.images[2] ?? attraction.images[0] }}
+              style={styles.photoSmall}
+              contentFit="cover"
+              transition={200}
+            />
+            <View style={styles.photoMore}>
+              <Text style={styles.photoMoreText}>10+</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* ── Details ──────────────────────────────────────────────── */}
+        <View style={styles.content}>
+          <Text style={styles.detailsLabel}>DETAILS</Text>
+          <Text style={styles.description} numberOfLines={expanded ? undefined : 4}>
+            {attraction.description}
+          </Text>
+          <TouchableOpacity onPress={() => setExpanded(!expanded)}>
+            <Text style={styles.readMore}>{expanded ? 'Show less' : 'Read More'}</Text>
+          </TouchableOpacity>
+
+          {/* Meta row */}
           <View style={styles.metaRow}>
             <View style={styles.metaItem}>
-              <Text style={styles.metaIcon}>{'\uD83D\uDCCD'}</Text>
+              <Text style={styles.metaIcon}>📍</Text>
               <Text style={styles.metaText}>{attraction.city}</Text>
             </View>
             <View style={styles.metaItem}>
-              <Text style={styles.metaIcon}>{'\uD83D\uDD52'}</Text>
-              <Text style={styles.metaText}>{attraction.openingHours}</Text>
+              <Text style={styles.metaIcon}>⭐</Text>
+              <Text style={styles.metaText}>{attraction.rating.toFixed(1)} / 5</Text>
+            </View>
+            <View style={styles.metaItem}>
+              <Text style={styles.metaIcon}>🕙</Text>
+              <Text style={styles.metaText} numberOfLines={1}>{attraction.openingHours}</Text>
             </View>
           </View>
-
-          {/* Rating & Price */}
-          <View style={styles.ratingPriceRow}>
-            <View>
-              <RatingStars rating={attraction.rating} showCount count={attraction.reviewCount} />
-              <Text style={styles.ratingNum}>{attraction.rating.toFixed(1)} out of 5</Text>
-            </View>
-            <PriceBadge price={attraction.price} size="lg" />
-          </View>
-
-          {/* Description */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>About</Text>
-            <Text style={styles.description}>{attraction.description}</Text>
-          </View>
-
-          {/* Category */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Category</Text>
-            <View style={styles.tagRow}>
-              <View style={styles.tag}>
-                <Text style={styles.tagText}>{attraction.category}</Text>
-              </View>
-            </View>
-          </View>
-
-          {/* Location */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Location</Text>
-            <View style={styles.locationCard}>
-              <Text style={styles.locationIcon}>{'\uD83D\uDDFA\uFE0F'}</Text>
-              <View>
-                <Text style={styles.locationName}>{attraction.city}, Saudi Arabia</Text>
-                <Text style={styles.locationCoords}>
-                  {attraction.latitude.toFixed(4)}, {attraction.longitude.toFixed(4)}
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={{ height: 120 }} />
         </View>
+
+        <View style={{ height: 110 }} />
       </ScrollView>
 
-      {/* Bottom CTA */}
+      {/* ── Bottom Bar ───────────────────────────────────────────────── */}
       <View style={styles.bottomBar}>
         <View>
-          <Text style={styles.bottomLabel}>Entry Fee</Text>
+          <Text style={styles.priceLabel}>
+            {attraction.price === 0 ? 'Free Entry' : 'Entry Fee'}
+          </Text>
           <PriceBadge price={attraction.price} size="lg" />
         </View>
-        <Button
-          title={attraction.price === 0 ? 'Visit Now' : 'Book Ticket'}
-          onPress={() => {
-            Alert.alert(
-              attraction.price === 0 ? 'Directions' : 'Booking Confirmed',
-              attraction.price === 0
-                ? `Opening Maps to ${attraction.name}, ${attraction.city}...`
-                : `Your ticket for ${attraction.name} has been booked!\n\nEntry fee: ${attraction.price} SAR\nLocation: ${attraction.city}`,
-              [{ text: 'OK' }]
-            );
-          }}
-          size="lg"
-        />
+        <TouchableOpacity style={styles.continueBtn} onPress={handleBook}>
+          <Text style={styles.continueBtnText}>Continue →</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
+const PHOTO_H = 150;
+
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.white },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  backBtn: {
-    position: 'absolute', top: 50, left: spacing.md,
-    width: 40, height: 40, borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center', justifyContent: 'center',
-    ...shadows.small,
+
+  // Hero
+  heroWrap: { width: '100%', height: 280 },
+  heroImg: { width: '100%', height: '100%', backgroundColor: colors.pearl },
+  heroActions: {
+    position: 'absolute', top: 48, left: 0, right: 0,
+    flexDirection: 'row', justifyContent: 'space-between',
+    paddingHorizontal: spacing.md,
   },
-  backIcon: { fontSize: 20, color: colors.charcoal },
-  content: { padding: spacing.md },
-  titleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  name: { fontSize: typography.sizes.xl, fontWeight: '700', color: colors.charcoal, flex: 1 },
-  nameAr: { fontSize: typography.sizes.md, color: colors.slate, marginTop: 4 },
-  metaRow: { flexDirection: 'row', gap: spacing.lg, marginTop: spacing.md },
-  metaItem: { flexDirection: 'row', alignItems: 'center' },
-  metaIcon: { fontSize: 16, marginRight: spacing.xs },
-  metaText: { fontSize: typography.sizes.sm, color: colors.slate },
-  ratingPriceRow: {
-    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    marginTop: spacing.md, paddingVertical: spacing.md,
-    borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.pearl,
+  heroActRight: { flexDirection: 'row', gap: spacing.sm },
+  heroBtn: {
+    width: 38, height: 38, borderRadius: 19,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    alignItems: 'center', justifyContent: 'center',
+    ...shadows.sm,
   },
-  ratingNum: { fontSize: typography.sizes.xs, color: colors.slate, marginTop: 4 },
-  section: { marginTop: spacing.lg },
-  sectionTitle: { fontSize: typography.sizes.lg, fontWeight: '700', color: colors.charcoal, marginBottom: spacing.sm },
-  description: { fontSize: typography.sizes.md, color: colors.slate, lineHeight: 24 },
-  tagRow: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
-  tag: {
-    backgroundColor: colors.pearl, paddingVertical: spacing.xs + 2, paddingHorizontal: spacing.md,
+  heroBtnIcon: { fontSize: 17, color: colors.charcoal },
+  heroOverlay: {
+    position: 'absolute', bottom: 0, left: 0, right: 0,
+    paddingHorizontal: spacing.md, paddingBottom: spacing.md, paddingTop: 60,
+  },
+  heroName: {
+    fontSize: typography.sizes.xl, fontWeight: '800', color: colors.white,
+    textShadowColor: 'rgba(0,0,0,0.4)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 4,
+  },
+  heroCity: { fontSize: typography.sizes.sm, color: 'rgba(255,255,255,0.8)', marginTop: 3 },
+  heroRatingChip: {
+    flexDirection: 'row', alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.22)', alignSelf: 'flex-start',
+    paddingHorizontal: spacing.sm, paddingVertical: 4,
+    borderRadius: borderRadius.full, marginTop: spacing.xs,
+    gap: 4,
+  },
+  heroRatingStar: { fontSize: 13 },
+  heroRatingNum: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.white },
+
+  // Tabs
+  tabRow: {
+    paddingHorizontal: spacing.md, paddingVertical: spacing.sm, gap: spacing.sm,
+    borderBottomWidth: 1, borderBottomColor: colors.pearl,
+  },
+  tab: {
+    paddingVertical: spacing.xs + 2, paddingHorizontal: spacing.md + 4,
     borderRadius: borderRadius.full,
+    borderWidth: 1.5, borderColor: colors.pearl,
   },
-  tagText: { fontSize: typography.sizes.sm, color: colors.charcoal, fontWeight: '500', textTransform: 'capitalize' },
-  locationCard: {
-    flexDirection: 'row', alignItems: 'center', gap: spacing.sm,
-    backgroundColor: colors.pearl, borderRadius: borderRadius.md, padding: spacing.md,
+  tabActive: { backgroundColor: colors.primary, borderColor: colors.primary },
+  tabText: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.charcoal },
+  tabTextActive: { color: colors.white },
+
+  // Photo grid
+  photoGrid: {
+    flexDirection: 'row', height: PHOTO_H,
+    marginHorizontal: spacing.md, marginTop: spacing.md,
+    borderRadius: borderRadius.lg, overflow: 'hidden', gap: 4,
   },
-  locationIcon: { fontSize: 28 },
-  locationName: { fontSize: typography.sizes.md, fontWeight: '600', color: colors.charcoal },
-  locationCoords: { fontSize: typography.sizes.xs, color: colors.slate, marginTop: 2 },
+  photoLeft: { width: '58%', height: '100%', backgroundColor: colors.pearl },
+  photoRightCol: { flex: 1, gap: 4 },
+  photoSmall: { flex: 1, backgroundColor: colors.pearl },
+  photoMore: {
+    height: 46, backgroundColor: 'rgba(5,31,31,0.7)',
+    alignItems: 'center', justifyContent: 'center',
+  },
+  photoMoreText: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.white },
+
+  // Content
+  content: { paddingHorizontal: spacing.md, paddingTop: spacing.lg },
+  detailsLabel: {
+    fontSize: typography.sizes.xs, fontWeight: '800', letterSpacing: 1,
+    color: colors.slate, marginBottom: spacing.xs,
+  },
+  description: { fontSize: typography.sizes.md, color: colors.slate, lineHeight: 23 },
+  readMore: {
+    fontSize: typography.sizes.sm, fontWeight: '700', color: colors.primary,
+    marginTop: spacing.xs,
+  },
+  metaRow: {
+    flexDirection: 'row', gap: spacing.md, marginTop: spacing.lg,
+    paddingTop: spacing.md, borderTopWidth: 1, borderTopColor: colors.pearl,
+    flexWrap: 'wrap',
+  },
+  metaItem: { flexDirection: 'row', alignItems: 'center', gap: 4 },
+  metaIcon: { fontSize: 14 },
+  metaText: { fontSize: typography.sizes.sm, color: colors.slate },
+
+  // Bottom bar
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0,
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
     backgroundColor: colors.white, padding: spacing.md, paddingBottom: spacing.xl,
     borderTopWidth: 1, borderTopColor: colors.pearl,
-    ...shadows.large,
+    ...shadows.lg,
   },
-  bottomLabel: { fontSize: typography.sizes.xs, color: colors.slate, marginBottom: 4 },
+  priceLabel: { fontSize: typography.sizes.xs, color: colors.slate, marginBottom: 4 },
+  continueBtn: {
+    backgroundColor: colors.primary, borderRadius: 28,
+    paddingVertical: 14, paddingHorizontal: spacing.xl,
+    ...shadows.md,
+  },
+  continueBtnText: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.white },
 });
