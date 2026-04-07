@@ -7,12 +7,13 @@ import Card from '../../components/common/Card';
 import { colors, gradients, typography, spacing, borderRadius } from '../../constants/theme';
 
 const SERVICES = [
-  { id: '1', icon: '✈️', title: 'Visa & Package', subtitle: 'Flight, hotel & instant e-Visa', route: 'VisaPackage', colors: ['#6a58af', '#846edb'] as const },
+  { id: '1', icon: '✈️', title: 'Visa & Package', subtitle: 'Flight, hotel & instant e-Visa', route: 'VisaPackage', colors: ['#0f4522', '#1b6b3a'] as const },
   { id: '2', icon: '🚇', title: 'Transport', subtitle: 'Metro, bus, train & ride-hailing', route: 'Transport', colors: ['#053333', '#214242'] as const },
   { id: '3', icon: '🆘', title: 'Emergency SOS', subtitle: 'Emergency contacts & assistance', route: 'EmergencySOS', colors: ['#962640', '#cf6d84'] as const },
   { id: '4', icon: '🗺️', title: 'Offline Maps', subtitle: 'Download maps for offline use', route: 'OfflineMaps', colors: ['#053333', '#547070'] as const },
   { id: '5', icon: '🛡️', title: 'Travel Insurance', subtitle: 'Health & travel coverage', route: 'Insurance', colors: ['#2fba89', '#82d9bf'] as const },
-  { id: '6', icon: '🗣️', title: 'Language Helper', subtitle: 'Arabic phrases & translator', route: 'LanguageHelper', colors: ['#846edb', '#b5a8e9'] as const },
+  { id: '6', icon: '🗣️', title: 'Language Helper', subtitle: 'Arabic phrases & translator', route: 'LanguageHelper', colors: ['#1b6b3a', '#2d8f55'] as const },
+  { id: '7', icon: '🎧', title: 'Customer Care', subtitle: 'Support, FAQ & emergency contacts', route: 'CustomerCare', colors: ['#a07830', '#c8a84b'] as const },
 ];
 
 export default function ServicesScreen() {

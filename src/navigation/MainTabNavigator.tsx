@@ -4,29 +4,29 @@ import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/b
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors, typography, spacing } from '../constants/theme';
+import { colors, typography } from '../constants/theme';
 import HomeStack from './HomeStack';
 import ExploreStack from './ExploreStack';
 import WalletStack from './WalletStack';
-import SearchStack from './SearchStack';
+import ServicesStack from './ServicesStack';
 import ProfileStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICONS: Record<string, string> = {
-  HomeTab:    '🏠',
-  ExploreTab: '🧭',
-  WalletTab:  '💳',
-  SearchTab:  '🔍',
-  ProfileTab: '👤',
+  HomeTab:     '🏠',
+  ExploreTab:  '🧭',
+  WalletTab:   '💳',
+  ServicesTab: '⚡',
+  ProfileTab:  '👤',
 };
 
 const TAB_LABELS: Record<string, string> = {
-  HomeTab:    'Home',
-  ExploreTab: 'Explore',
-  WalletTab:  'Wallet',
-  SearchTab:  'Search',
-  ProfileTab: 'Profile',
+  HomeTab:     'Home',
+  ExploreTab:  'Explore',
+  WalletTab:   'Wallet',
+  ServicesTab: 'Services',
+  ProfileTab:  'Profile',
 };
 
 // Screens where the tab bar should be hidden
@@ -36,9 +36,10 @@ const HIDDEN_TAB_SCREENS = new Set([
   'Entertainment', 'Dining', 'Shopping', 'Accommodation',
   'AITripPlanner', 'PrayerTimes', 'CulturalGuide', 'CuisineFinder',
   'Transport', 'EmergencySOS', 'OfflineMaps', 'Insurance', 'LanguageHelper', 'VisaPackage',
+  'CustomerCare',
   'DigitalID', 'Payment', 'CurrencyExchange', 'ExpenseTracker', 'LoyaltyCards', 'MyTickets',
   'MyBookings', 'NFTCollection', 'Reviews', 'ShareExperience', 'PhotoSpots', 'Settings',
-  'Notifications', 'SearchMain', 'DigitalCheckIn', 'Registration',
+  'Notifications', 'Search', 'DigitalCheckIn', 'Registration', 'EditProfile', 'DigitalDocuments',
 ]);
 
 function shouldHideTabBar(route: any): boolean {
@@ -61,9 +62,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
             const onPress = () => {
               const event = navigation.emit({ type: 'tabPress', target: route.key, canPreventDefault: true });
-              if (!isFocused && !event.defaultPrevented) {
-                navigation.navigate(route.name);
-              }
+              if (!isFocused && !event.defaultPrevented) navigation.navigate(route.name);
             };
 
             if (isWallet) {
@@ -72,8 +71,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                   <LinearGradient
                     colors={['#c8a84b', '#1b6b3a']}
                     style={styles.walletTab}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
+                    start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
                   >
                     <Text style={styles.walletIcon}>💳</Text>
                   </LinearGradient>
@@ -107,11 +105,11 @@ export default function MainTabNavigator() {
       tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{ headerShown: false }}
     >
-      <Tab.Screen name="HomeTab"    component={HomeStack} />
-      <Tab.Screen name="ExploreTab" component={ExploreStack} />
-      <Tab.Screen name="WalletTab"  component={WalletStack} />
-      <Tab.Screen name="SearchTab"  component={SearchStack} />
-      <Tab.Screen name="ProfileTab" component={ProfileStack} />
+      <Tab.Screen name="HomeTab"     component={HomeStack} />
+      <Tab.Screen name="ExploreTab"  component={ExploreStack} />
+      <Tab.Screen name="WalletTab"   component={WalletStack} />
+      <Tab.Screen name="ServicesTab" component={ServicesStack} />
+      <Tab.Screen name="ProfileTab"  component={ProfileStack} />
     </Tab.Navigator>
   );
 }
@@ -122,10 +120,9 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 88 : 72,
   },
   blurView: {
-    flex: 1,
-    borderTopLeftRadius: 20, borderTopRightRadius: 20,
-    overflow: 'hidden',
-    borderTopWidth: 0.5, borderTopColor: 'rgba(27,107,58,0.2)',
+    flex: 1, borderTopLeftRadius: 20, borderTopRightRadius: 20,
+    overflow: 'hidden', borderTopWidth: 0.5,
+    borderTopColor: 'rgba(27,107,58,0.2)',
   },
   tabBar: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around',
@@ -145,8 +142,7 @@ const styles = StyleSheet.create({
   walletTab: {
     width: 56, height: 56, borderRadius: 28,
     alignItems: 'center', justifyContent: 'center',
-    shadowColor: '#c8a84b',
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#c8a84b', shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.4, shadowRadius: 8, elevation: 8,
   },
   walletIcon: { fontSize: 26 },

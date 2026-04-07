@@ -19,6 +19,8 @@ interface AuthState {
   login: (email: string, password: string) => void;
   logout: () => void;
   setOnboarded: () => void;
+  register: (name: string, email: string, passportNumber?: string, nationality?: string) => void;
+  updateProfile: (fields: Partial<User>) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -27,20 +29,33 @@ export const useAuthStore = create<AuthState>((set) => ({
   isOnboarded: false,
 
   login: (_email: string, _password: string) => {
-    set({
-      user: MOCK_USER,
-      isAuthenticated: true,
-    });
+    set({ user: MOCK_USER, isAuthenticated: true });
   },
 
   logout: () => {
-    set({
-      user: null,
-      isAuthenticated: false,
-    });
+    set({ user: null, isAuthenticated: false });
   },
 
   setOnboarded: () => {
     set({ isOnboarded: true });
+  },
+
+  register: (name, email, passportNumber, nationality) => {
+    set({
+      user: {
+        ...MOCK_USER,
+        name,
+        email,
+        passportNumber: passportNumber ?? MOCK_USER.passportNumber,
+        nationality: nationality ?? MOCK_USER.nationality,
+      },
+      isAuthenticated: true,
+    });
+  },
+
+  updateProfile: (fields) => {
+    set((state) => ({
+      user: state.user ? { ...state.user, ...fields } : state.user,
+    }));
   },
 }));

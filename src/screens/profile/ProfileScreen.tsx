@@ -1,17 +1,20 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { colors, typography, spacing, borderRadius } from '../../constants/theme';
 import { useAuthStore } from '../../store/useAuthStore';
 
 const MENU_ITEMS = [
-  { id: '1', icon: '📋', label: 'My Bookings', route: 'MyBookings' },
-  { id: '2', icon: '🖼️', label: 'NFT Collection', route: 'NFTCollection' },
-  { id: '3', icon: '⭐', label: 'My Reviews', route: 'Reviews' },
-  { id: '4', icon: '📤', label: 'Share Experience', route: 'ShareExperience' },
-  { id: '5', icon: '📸', label: 'Photo Spots', route: 'PhotoSpots' },
-  { id: '6', icon: '⚙️', label: 'Settings', route: 'Settings' },
+  { id: '0a', icon: '✏️', label: 'Edit Profile',       route: 'EditProfile' },
+  { id: '0b', icon: '📄', label: 'Digital Documents',  route: 'DigitalDocuments' },
+  { id: '1',  icon: '📋', label: 'My Bookings',        route: 'MyBookings' },
+  { id: '2',  icon: '🖼️', label: 'NFT Collection',     route: 'NFTCollection' },
+  { id: '3',  icon: '⭐', label: 'My Reviews',         route: 'Reviews' },
+  { id: '4',  icon: '📤', label: 'Share Experience',   route: 'ShareExperience' },
+  { id: '5',  icon: '📸', label: 'Photo Spots',        route: 'PhotoSpots' },
+  { id: '6',  icon: '⚙️', label: 'Settings',           route: 'Settings' },
 ];
 
 export default function ProfileScreen() {
@@ -23,11 +26,16 @@ export default function ProfileScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Profile Header */}
         <View style={styles.header}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>{user?.name?.charAt(0) ?? 'T'}</Text>
-          </View>
+          <LinearGradient colors={['#c8a84b', '#a07830']} style={styles.avatar}>
+            <Text style={styles.avatarText}>{user?.name?.charAt(0)?.toUpperCase() ?? 'T'}</Text>
+          </LinearGradient>
           <Text style={styles.name}>{user?.name ?? 'Guest'}</Text>
           <Text style={styles.email}>{user?.email ?? ''}</Text>
+          {user?.visaType ? (
+            <View style={styles.visaBadge}>
+              <Text style={styles.visaBadgeText}>✈️  {user.visaType}</Text>
+            </View>
+          ) : null}
           <View style={styles.statsRow}>
             <View style={styles.stat}>
               <Text style={styles.statNum}>12</Text>
@@ -46,6 +54,14 @@ export default function ProfileScreen() {
           </View>
         </View>
 
+        {/* Create Account link */}
+        <TouchableOpacity
+          style={styles.registerLink}
+          onPress={() => navigation.navigate('Registration')}
+        >
+          <Text style={styles.registerLinkText}>🆕  New user? Create Account →</Text>
+        </TouchableOpacity>
+
         {/* Menu Items */}
         <View style={styles.menu}>
           {MENU_ITEMS.map((item) => (
@@ -56,7 +72,7 @@ export default function ProfileScreen() {
             >
               <Text style={styles.menuIcon}>{item.icon}</Text>
               <Text style={styles.menuLabel}>{item.label}</Text>
-              <Text style={styles.menuArrow}>{'\u203A'}</Text>
+              <Text style={styles.menuArrow}>›</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -82,22 +98,36 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.white },
-  header: { alignItems: 'center', paddingVertical: spacing.xl },
+  header: { alignItems: 'center', paddingVertical: spacing.xl, paddingHorizontal: spacing.md },
   avatar: {
-    width: 80, height: 80, borderRadius: 40, backgroundColor: colors.sand,
+    width: 84, height: 84, borderRadius: 42,
     alignItems: 'center', justifyContent: 'center',
   },
-  avatarText: { fontSize: 32, fontWeight: '700', color: colors.white },
+  avatarText: { fontSize: 34, fontWeight: '800', color: colors.white },
   name: { fontSize: typography.sizes.xl, fontWeight: '700', color: colors.charcoal, marginTop: spacing.md },
   email: { fontSize: typography.sizes.sm, color: colors.slate, marginTop: 4 },
+  visaBadge: {
+    marginTop: spacing.sm, backgroundColor: '#e8f5ee',
+    paddingHorizontal: spacing.md, paddingVertical: spacing.xs,
+    borderRadius: borderRadius.full, borderWidth: 1, borderColor: '#b7dfc8',
+  },
+  visaBadgeText: { fontSize: typography.sizes.xs, fontWeight: '600', color: colors.primary },
   statsRow: {
     flexDirection: 'row', marginTop: spacing.lg,
     backgroundColor: colors.pearl, borderRadius: borderRadius.lg, padding: spacing.md,
+    width: '100%',
   },
   stat: { flex: 1, alignItems: 'center' },
   statNum: { fontSize: typography.sizes.xl, fontWeight: '700', color: colors.charcoal },
   statLabel: { fontSize: typography.sizes.xs, color: colors.slate, marginTop: 2 },
   statDivider: { width: 1, backgroundColor: colors.white, marginHorizontal: spacing.sm },
+  registerLink: {
+    marginHorizontal: spacing.md, marginBottom: spacing.sm,
+    backgroundColor: '#e8f5ee', borderRadius: borderRadius.lg,
+    padding: spacing.sm, alignItems: 'center',
+    borderWidth: 1, borderColor: '#b7dfc8',
+  },
+  registerLinkText: { fontSize: typography.sizes.sm, color: colors.primary, fontWeight: '600' },
   menu: { paddingHorizontal: spacing.md },
   menuItem: {
     flexDirection: 'row', alignItems: 'center', paddingVertical: spacing.md,
