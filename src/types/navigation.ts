@@ -38,6 +38,7 @@ export type ExploreStackParamList = {
   MallDetail: { id: string };
   Accommodation: undefined;
   HotelDetail: { id: string };
+  DigitalCheckIn: { bookingId?: string };
   AITripPlanner: undefined;
   PrayerTimes: undefined;
   CulturalGuide: undefined;
@@ -61,6 +62,7 @@ export type ServicesStackParamList = {
   OfflineMaps: undefined;
   Insurance: undefined;
   LanguageHelper: undefined;
+  CustomerCare: undefined;
 };
 
 export type ProfileStackParamList = {
@@ -71,4 +73,7 @@ export type ProfileStackParamList = {
   ShareExperience: undefined;
   PhotoSpots: undefined;
   Settings: undefined;
+  EditProfile: undefined;
+  DigitalDocuments: undefined;
+  Registration: undefined;
 };

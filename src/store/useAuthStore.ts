@@ -19,12 +19,14 @@ interface AuthState {
   login: (email: string, password: string) => void;
   logout: () => void;
   setOnboarded: () => void;
+  register: (name: string, email: string, passportNumber: string, nationality: string) => void;
+  updateProfile: (updates: Partial<User>) => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  isAuthenticated: false,
-  isOnboarded: false,
+export const useAuthStore = create<AuthState>((set, get) => ({
+  user: MOCK_USER,
+  isAuthenticated: true,
+  isOnboarded: true,
 
   login: (_email: string, _password: string) => {
     set({
@@ -42,5 +44,26 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   setOnboarded: () => {
     set({ isOnboarded: true });
+  },
+
+  register: (name: string, email: string, passportNumber: string, nationality: string) => {
+    const newUser: User = {
+      id: `usr_${Date.now()}`,
+      name,
+      email,
+      avatar: `https://i.pravatar.cc/150?u=${email}`,
+      nationality,
+      passportNumber,
+      visaType: 'Tourist Visa',
+      memberSince: new Date().toISOString().split('T')[0],
+    };
+    set({ user: newUser, isAuthenticated: true, isOnboarded: true });
+  },
+
+  updateProfile: (updates: Partial<User>) => {
+    const current = get().user;
+    if (current) {
+      set({ user: { ...current, ...updates } });
+    }
   },
 }));

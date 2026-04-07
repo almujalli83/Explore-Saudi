@@ -13,6 +13,7 @@ const SERVICES = [
   { id: '4', icon: '🗺️', title: 'Offline Maps', subtitle: 'Download maps for offline use', route: 'OfflineMaps', colors: ['#053333', '#547070'] as const },
   { id: '5', icon: '🛡️', title: 'Travel Insurance', subtitle: 'Health & travel coverage', route: 'Insurance', colors: ['#2fba89', '#82d9bf'] as const },
   { id: '6', icon: '🗣️', title: 'Language Helper', subtitle: 'Arabic phrases & translator', route: 'LanguageHelper', colors: ['#846edb', '#b5a8e9'] as const },
+  { id: '7', icon: '🎧', title: 'Customer Care', subtitle: 'Live chat & support assistance', route: 'CustomerCare', colors: ['#e53e3e', '#fc8181'] as const },
 ];
 
 export default function ServicesScreen() {

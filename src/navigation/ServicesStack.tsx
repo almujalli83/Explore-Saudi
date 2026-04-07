@@ -7,6 +7,7 @@ import OfflineMapsScreen from '../screens/services/OfflineMapsScreen';
 import InsuranceScreen from '../screens/services/InsuranceScreen';
 import LanguageHelperScreen from '../screens/services/LanguageHelperScreen';
 import VisaPackageScreen from '../screens/services/VisaPackageScreen';
+import CustomerCareScreen from '../screens/services/CustomerCareScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function ServicesStack() {
       <Stack.Screen name="Insurance" component={InsuranceScreen} />
       <Stack.Screen name="LanguageHelper" component={LanguageHelperScreen} />
       <Stack.Screen name="VisaPackage" component={VisaPackageScreen} />
+      <Stack.Screen name="CustomerCare" component={CustomerCareScreen} />
     </Stack.Navigator>
   );
 }

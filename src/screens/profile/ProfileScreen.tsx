@@ -6,12 +6,14 @@ import { colors, typography, spacing, borderRadius } from '../../constants/theme
 import { useAuthStore } from '../../store/useAuthStore';
 
 const MENU_ITEMS = [
-  { id: '1', icon: '📋', label: 'My Bookings', route: 'MyBookings' },
-  { id: '2', icon: '🖼️', label: 'NFT Collection', route: 'NFTCollection' },
-  { id: '3', icon: '⭐', label: 'My Reviews', route: 'Reviews' },
-  { id: '4', icon: '📤', label: 'Share Experience', route: 'ShareExperience' },
-  { id: '5', icon: '📸', label: 'Photo Spots', route: 'PhotoSpots' },
-  { id: '6', icon: '⚙️', label: 'Settings', route: 'Settings' },
+  { id: '1', icon: '✏️', label: 'Edit Profile', route: 'EditProfile' },
+  { id: '2', icon: '📄', label: 'Digital Documents', route: 'DigitalDocuments' },
+  { id: '3', icon: '📋', label: 'My Bookings', route: 'MyBookings' },
+  { id: '4', icon: '🖼️', label: 'NFT Collection', route: 'NFTCollection' },
+  { id: '5', icon: '⭐', label: 'My Reviews', route: 'Reviews' },
+  { id: '6', icon: '📤', label: 'Share Experience', route: 'ShareExperience' },
+  { id: '7', icon: '📸', label: 'Photo Spots', route: 'PhotoSpots' },
+  { id: '8', icon: '⚙️', label: 'Settings', route: 'Settings' },
 ];
 
 export default function ProfileScreen() {
