@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
 
   // Attraction Cards
   attractionCard: {
-    width: SCREEN_WIDTH * 0.65, height: 200, borderRadius: borderRadius.lg,
+    width: 260, height: 200, borderRadius: borderRadius.lg,
     marginRight: spacing.sm, overflow: 'hidden', ...shadows.medium,
   },
   attractionImage: { width: '100%', height: '100%' },
@@ -461,7 +461,7 @@ const styles = StyleSheet.create({
 
   // Event Cards
   eventCard: {
-    width: SCREEN_WIDTH * 0.55, height: 170, borderRadius: borderRadius.lg,
+    width: 210, height: 170, borderRadius: borderRadius.lg,
     marginRight: spacing.sm, overflow: 'hidden', ...shadows.medium,
   },
   eventImage: { width: '100%', height: '100%' },
@@ -482,9 +482,9 @@ const styles = StyleSheet.create({
   restaurantPrice: { fontSize: typography.sizes.sm, color: colors.primary, fontWeight: '600' },
 
   // Quick Services Grid
-  servicesGrid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: spacing.md, gap: spacing.sm },
+  servicesGrid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: spacing.md },
   serviceItem: {
-    width: (SCREEN_WIDTH - spacing.md * 2 - spacing.sm * 3) / 4,
+    width: '23%', marginRight: '2%', marginBottom: spacing.sm,
     alignItems: 'center', paddingVertical: spacing.sm,
   },
   serviceIconWrap: {
