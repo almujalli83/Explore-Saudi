@@ -71,7 +71,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
               return (
                 <TouchableOpacity key={route.key} onPress={onPress} style={styles.walletTabWrapper}>
                   <LinearGradient
-                    colors={[colors.primary, colors.primaryDark]}
+                    colors={['#c8a84b', '#1b6b3a']}
                     style={styles.walletTab}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     overflow: 'hidden',
     borderTopWidth: 0.5,
-    borderTopColor: 'rgba(132, 110, 219, 0.2)',
+    borderTopColor: 'rgba(27, 107, 58, 0.2)',
   },
   tabBar: {
     flexDirection: 'row',
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: colors.primary,
+    shadowColor: '#c8a84b',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 8,

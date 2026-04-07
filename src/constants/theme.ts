@@ -1,27 +1,27 @@
 import { Platform } from 'react-native';
 
-// Design system inspired by mt.gov.sa (Saudi Ministry of Tourism)
-// Font: FS Albert Pro / FS Albert Arabic
-// Primary: Purple (#846edb) — links, CTAs, focus
-// Secondary: Lime (#d7f285) — highlights, badges
-// Dark: Deep green-black (#051f1f) — body text, headers
-// SlateGreen: (#053333) — dark backgrounds, cards
-// Success: Emerald (#2fba89) — confirmations
-// Info: Mint (#82d9bf) — info, accents
-// Warning: Amber (#ffb752)
-// Danger: Crimson (#962640)
+// Design system — Explore Saudi
+// Primary: Saudi Green (#1b6b3a) — brand, CTAs, active states
+// Gold:    Desert Gold (#c8a84b) — accents, wallet, highlights
+// Dark:    Deep teal-black (#051f1f) — body text, headers
+// Success: Emerald (#2fba89)
 
 export const colors = {
-  // Primary brand
-  primary: '#846edb',
-  primaryLight: '#b5a8e9',
-  primaryDark: '#6a58af',
+  // Primary brand — Saudi green
+  primary: '#1b6b3a',
+  primaryLight: '#2d8f55',
+  primaryDark: '#0f4522',
 
-  // Secondary / accent
+  // Gold / desert accent
+  gold: '#c8a84b',
+  goldLight: '#e8c96b',
+  goldDark: '#a07830',
+
+  // Secondary / lime badge
   secondary: '#d7f285',
   secondaryDark: '#b5cc5e',
 
-  // Greens (signature mt.gov.sa)
+  // Greens (signature dark backgrounds)
   teal: '#053333',
   tealLight: '#214242',
   tealDark: '#051f1f',
@@ -43,21 +43,25 @@ export const colors = {
   error: '#962640',
   info: '#82d9bf',
 
-  // Legacy aliases (ease migration)
-  sand: '#846edb',
-  sandLight: '#b5a8e9',
-  sandDark: '#6a58af',
+  // Legacy aliases — now green
+  sand: '#1b6b3a',
+  sandLight: '#2d8f55',
+  sandDark: '#0f4522',
 } as const;
 
 export const gradients = {
-  goldGradient: ['#846edb', '#b5a8e9', '#6a58af'] as const,
+  goldGradient: ['#c8a84b', '#e8c96b', '#a07830'] as const,
   tealGradient: ['#051f1f', '#053333', '#214242'] as const,
   nightGradient: ['#051f1f', '#053333', '#547070'] as const,
-  sunsetGradient: ['#846edb', '#82d9bf', '#053333'] as const,
-  // mt.gov.sa signature animated gradient
+  sunsetGradient: ['#1b6b3a', '#82d9bf', '#053333'] as const,
+  // Saudi green hero gradient
+  heroGradient: ['#0f4522', '#1b6b3a', '#2d8f55'] as const,
+  // mt.gov.sa signature
   mtGovGradient: ['#003232', '#009696', '#007846', '#00a000'] as const,
-  // Purple to mint
-  primaryGradient: ['#6a58af', '#846edb', '#b5a8e9'] as const,
+  // Primary green gradient
+  primaryGradient: ['#0f4522', '#1b6b3a', '#2d8f55'] as const,
+  // Gold to green
+  goldGreenGradient: ['#c8a84b', '#1b6b3a'] as const,
   // Success gradient
   successGradient: ['#2fba89', '#82d9bf'] as const,
 } as const;
@@ -97,40 +101,35 @@ export const borderRadius = {
 } as const;
 
 export const shadows = {
+  sm: Platform.select({
+    ios: { shadowColor: '#030f0f', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.08, shadowRadius: 4 },
+    android: { elevation: 2 },
+    default: {},
+  }),
+  md: Platform.select({
+    ios: { shadowColor: '#030f0f', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.12, shadowRadius: 8 },
+    android: { elevation: 5 },
+    default: {},
+  }),
+  lg: Platform.select({
+    ios: { shadowColor: '#030f0f', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.18, shadowRadius: 16 },
+    android: { elevation: 10 },
+    default: {},
+  }),
+  // Legacy aliases
   small: Platform.select({
-    ios: {
-      shadowColor: '#030f0f',
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.08,
-      shadowRadius: 4,
-    },
-    android: {
-      elevation: 2,
-    },
+    ios: { shadowColor: '#030f0f', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.08, shadowRadius: 4 },
+    android: { elevation: 2 },
     default: {},
   }),
   medium: Platform.select({
-    ios: {
-      shadowColor: '#030f0f',
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.12,
-      shadowRadius: 8,
-    },
-    android: {
-      elevation: 5,
-    },
+    ios: { shadowColor: '#030f0f', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.12, shadowRadius: 8 },
+    android: { elevation: 5 },
     default: {},
   }),
   large: Platform.select({
-    ios: {
-      shadowColor: '#030f0f',
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.18,
-      shadowRadius: 16,
-    },
-    android: {
-      elevation: 10,
-    },
+    ios: { shadowColor: '#030f0f', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.18, shadowRadius: 16 },
+    android: { elevation: 10 },
     default: {},
   }),
 } as const;

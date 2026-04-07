@@ -8,13 +8,15 @@ import {
   TextInput,
   ActivityIndicator,
   Alert,
+  Platform,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { colors, typography, spacing, borderRadius, shadows } from '../../constants/theme';
 import { useAuthStore } from '../../store/useAuthStore';
 
-type Step = 'scan' | 'review';
+type Step = 'upload' | 'review';
 
 interface OCRData {
   name: string;
@@ -27,9 +29,10 @@ export default function RegistrationScreen() {
   const navigation = useNavigation<any>();
   const register = useAuthStore((s) => s.register);
 
-  const [step, setStep] = useState<Step>('scan');
+  const [step, setStep] = useState<Step>('upload');
   const [scanning, setScanning] = useState(false);
-  const [ocrData, setOcrData] = useState<OCRData | null>(null);
+  const [passportImageUri, setPassportImageUri] = useState<string | null>(null);
+  const [ocrDone, setOcrDone] = useState(false);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,8 +40,9 @@ export default function RegistrationScreen() {
   const [passportNumber, setPassportNumber] = useState('');
   const [nationality, setNationality] = useState('');
 
-  const simulateOCR = () => {
+  const runOCR = (imageUri: string) => {
     setScanning(true);
+    // Simulate OCR processing on the uploaded passport image
     setTimeout(() => {
       const mock: OCRData = {
         name: 'Sarah Al-Mansouri',
@@ -46,13 +50,35 @@ export default function RegistrationScreen() {
         nationality: 'Saudi Arabia',
         expiryDate: '2030-06-15',
       };
-      setOcrData(mock);
       setName(mock.name);
       setPassportNumber(mock.passportNumber);
       setNationality(mock.nationality);
       setScanning(false);
+      setOcrDone(true);
       setStep('review');
-    }, 2000);
+    }, 2200);
+  };
+
+  const pickPassportImage = () => {
+    if (Platform.OS === 'web') {
+      // Web: use native file picker via hidden <input type="file">
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (e: any) => {
+        const file = e.target.files?.[0];
+        if (file) {
+          const uri = URL.createObjectURL(file);
+          setPassportImageUri(uri);
+          runOCR(uri);
+        }
+      };
+      input.click();
+    } else {
+      // Mobile: simulate camera capture
+      setPassportImageUri('mock://camera');
+      runOCR('mock://camera');
+    }
   };
 
   const handleRegister = () => {
@@ -79,143 +105,123 @@ export default function RegistrationScreen() {
 
       {/* Step indicator */}
       <View style={styles.stepRow}>
-        <View style={[styles.stepDot, step === 'scan' ? styles.stepActive : styles.stepDone]}>
-          <Text style={styles.stepNum}>1</Text>
+        <View style={[styles.stepDot, styles.stepActive]}>
+          <Text style={styles.stepNum}>{step === 'upload' ? '1' : '✓'}</Text>
         </View>
-        <View style={styles.stepLine} />
+        <View style={[styles.stepLine, ocrDone && styles.stepLineDone]} />
         <View style={[styles.stepDot, step === 'review' ? styles.stepActive : styles.stepInactive]}>
           <Text style={styles.stepNum}>2</Text>
         </View>
         <View style={{ flex: 1 }} />
         <Text style={styles.stepLabel}>
-          {step === 'scan' ? 'Scan Passport' : 'Review Details'}
+          {step === 'upload' ? 'Upload Passport' : 'Review & Confirm'}
         </Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        {step === 'scan' ? (
-          <View style={styles.scanSection}>
-            <Text style={styles.sectionTitle}>Passport OCR Scan</Text>
+        {step === 'upload' ? (
+          <View>
+            <Text style={styles.sectionTitle}>Passport Upload & OCR</Text>
             <Text style={styles.sectionSub}>
-              Hold your passport up to the camera. Our OCR technology will automatically read your details.
+              Upload a photo of your passport. Our OCR engine will automatically read and fill in your details.
             </Text>
 
-            {/* Camera placeholder */}
-            <View style={styles.cameraBox}>
-              <View style={styles.cameraCornerTL} />
-              <View style={styles.cameraCornerTR} />
-              <View style={styles.cameraCornerBL} />
-              <View style={styles.cameraCornerBR} />
-              {scanning ? (
-                <View style={styles.scanningOverlay}>
-                  <ActivityIndicator size="large" color={colors.sand} />
-                  <Text style={styles.scanningText}>Reading passport…</Text>
+            {/* Upload / Preview area */}
+            {passportImageUri && passportImageUri !== 'mock://camera' ? (
+              <View style={styles.previewBox}>
+                <Image source={{ uri: passportImageUri }} style={styles.previewImage} resizeMode="cover" />
+                {scanning && (
+                  <View style={styles.scanOverlay}>
+                    <ActivityIndicator size="large" color={colors.gold} />
+                    <Text style={styles.scanText}>Reading passport data…</Text>
+                    <View style={styles.scanLine} />
+                  </View>
+                )}
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={[styles.uploadBox, scanning && styles.uploadBoxScanning]}
+                onPress={!scanning ? pickPassportImage : undefined}
+                activeOpacity={0.8}
+              >
+                {scanning ? (
+                  <View style={styles.scanningContent}>
+                    <ActivityIndicator size="large" color={colors.gold} />
+                    <Text style={styles.scanText}>Processing passport…</Text>
+                  </View>
+                ) : (
+                  <View style={styles.uploadContent}>
+                    <Text style={styles.uploadEmoji}>🛂</Text>
+                    <Text style={styles.uploadTitle}>
+                      {Platform.OS === 'web' ? 'Click to Upload Passport' : 'Tap to Scan Passport'}
+                    </Text>
+                    <Text style={styles.uploadSub}>
+                      {Platform.OS === 'web'
+                        ? 'JPG, PNG or PDF • Max 10MB'
+                        : 'Hold the passport in good lighting'}
+                    </Text>
+                    <View style={styles.uploadBtn}>
+                      <Text style={styles.uploadBtnText}>
+                        {Platform.OS === 'web' ? '📎  Choose File' : '📷  Open Camera'}
+                      </Text>
+                    </View>
+                  </View>
+                )}
+                {/* Corner frames */}
+                <View style={styles.cornerTL} />
+                <View style={styles.cornerTR} />
+                <View style={styles.cornerBL} />
+                <View style={styles.cornerBR} />
+              </TouchableOpacity>
+            )}
+
+            {/* OCR features list */}
+            <View style={styles.featureList}>
+              {['Instant data extraction', 'Name & nationality auto-fill', 'Passport number detection', 'Expiry date recognition'].map((f) => (
+                <View key={f} style={styles.featureRow}>
+                  <Text style={styles.featureTick}>✅</Text>
+                  <Text style={styles.featureText}>{f}</Text>
                 </View>
-              ) : (
-                <View style={styles.cameraPlaceholder}>
-                  <Text style={styles.cameraEmoji}>🛂</Text>
-                  <Text style={styles.cameraHint}>Position passport within frame</Text>
-                </View>
-              )}
+              ))}
             </View>
 
-            <TouchableOpacity
-              style={[styles.btn, scanning && styles.btnDisabled]}
-              onPress={simulateOCR}
-              disabled={scanning}
-            >
-              <Text style={styles.btnText}>
-                {scanning ? 'Scanning…' : '📷  Scan Passport'}
-              </Text>
-            </TouchableOpacity>
-
             <TouchableOpacity style={styles.skipBtn} onPress={() => setStep('review')}>
-              <Text style={styles.skipText}>Skip and enter manually</Text>
+              <Text style={styles.skipText}>Skip — enter details manually</Text>
             </TouchableOpacity>
           </View>
         ) : (
-          <View style={styles.reviewSection}>
+          <View>
             <Text style={styles.sectionTitle}>Review Your Details</Text>
             <Text style={styles.sectionSub}>
-              {ocrData
-                ? 'Passport data has been auto-filled. Please review and complete your registration.'
-                : 'Enter your details to create your account.'}
+              {ocrDone
+                ? 'Passport scanned successfully. Review the auto-filled data below before creating your account.'
+                : 'Enter your details to complete registration.'}
             </Text>
 
-            {ocrData && (
-              <View style={styles.ocrBadge}>
-                <Text style={styles.ocrBadgeText}>✅  Passport scanned successfully</Text>
+            {ocrDone && (
+              <View style={styles.ocrSuccessBanner}>
+                <Text style={styles.ocrSuccessIcon}>🎉</Text>
+                <View>
+                  <Text style={styles.ocrSuccessTitle}>OCR Complete</Text>
+                  <Text style={styles.ocrSuccessSub}>Passport data extracted successfully</Text>
+                </View>
               </View>
             )}
 
-            <View style={styles.fieldGroup}>
-              <Text style={styles.fieldLabel}>Full Name *</Text>
-              <TextInput
-                style={styles.input}
-                value={name}
-                onChangeText={setName}
-                placeholder="As it appears on your passport"
-                placeholderTextColor={colors.slate}
-              />
+            <View style={styles.formCard}>
+              <Field label="Full Name *" value={name} onChangeText={setName} placeholder="As on passport" />
+              <Field label="Email Address *" value={email} onChangeText={setEmail} placeholder="your@email.com" keyboardType="email-address" autoCapitalize="none" />
+              <Field label="Password *" value={password} onChangeText={setPassword} placeholder="Min. 8 characters" secureTextEntry />
+              <Field label="Passport Number" value={passportNumber} onChangeText={setPassportNumber} placeholder="e.g. P9876543" autoCapitalize="characters" />
+              <Field label="Nationality" value={nationality} onChangeText={setNationality} placeholder="e.g. Saudi Arabia" isLast />
             </View>
 
-            <View style={styles.fieldGroup}>
-              <Text style={styles.fieldLabel}>Email Address *</Text>
-              <TextInput
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-                placeholder="your@email.com"
-                placeholderTextColor={colors.slate}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-
-            <View style={styles.fieldGroup}>
-              <Text style={styles.fieldLabel}>Password *</Text>
-              <TextInput
-                style={styles.input}
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Minimum 8 characters"
-                placeholderTextColor={colors.slate}
-                secureTextEntry
-              />
-            </View>
-
-            <View style={styles.fieldGroup}>
-              <Text style={styles.fieldLabel}>Passport Number</Text>
-              <TextInput
-                style={styles.input}
-                value={passportNumber}
-                onChangeText={setPassportNumber}
-                placeholder="e.g. P1234567"
-                placeholderTextColor={colors.slate}
-                autoCapitalize="characters"
-              />
-            </View>
-
-            <View style={styles.fieldGroup}>
-              <Text style={styles.fieldLabel}>Nationality</Text>
-              <TextInput
-                style={styles.input}
-                value={nationality}
-                onChangeText={setNationality}
-                placeholder="e.g. Saudi Arabia"
-                placeholderTextColor={colors.slate}
-              />
-            </View>
-
-            <TouchableOpacity style={styles.btn} onPress={handleRegister}>
-              <Text style={styles.btnText}>Create Account</Text>
+            <TouchableOpacity style={styles.registerBtn} onPress={handleRegister}>
+              <Text style={styles.registerBtnText}>Create Account →</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.skipBtn}
-              onPress={() => setStep('scan')}
-            >
-              <Text style={styles.skipText}>← Back to passport scan</Text>
+            <TouchableOpacity style={styles.skipBtn} onPress={() => { setStep('upload'); setOcrDone(false); }}>
+              <Text style={styles.skipText}>← Back to passport upload</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -225,94 +231,132 @@ export default function RegistrationScreen() {
   );
 }
 
+interface FieldProps {
+  label: string;
+  value: string;
+  onChangeText: (t: string) => void;
+  placeholder?: string;
+  keyboardType?: 'default' | 'email-address';
+  autoCapitalize?: 'none' | 'characters' | 'sentences';
+  secureTextEntry?: boolean;
+  isLast?: boolean;
+}
+
+function Field({ label, value, onChangeText, placeholder, keyboardType = 'default', autoCapitalize = 'sentences', secureTextEntry, isLast }: FieldProps) {
+  return (
+    <View style={[fStyles.wrap, isLast && { borderBottomWidth: 0 }]}>
+      <Text style={fStyles.label}>{label}</Text>
+      <TextInput
+        style={fStyles.input}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor={colors.slate}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        secureTextEntry={secureTextEntry}
+      />
+    </View>
+  );
+}
+
+const fStyles = StyleSheet.create({
+  wrap: { paddingVertical: spacing.sm, borderBottomWidth: 1, borderBottomColor: colors.pearl },
+  label: { fontSize: typography.sizes.xs, fontWeight: '700', color: colors.slate, textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 4 },
+  input: { fontSize: typography.sizes.md, color: colors.charcoal, paddingVertical: 4 },
+});
+
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.white },
   header: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
     paddingHorizontal: spacing.md, paddingVertical: spacing.sm,
+    borderBottomWidth: 1, borderBottomColor: colors.pearl,
   },
   backBtn: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
   backIcon: { fontSize: 30, color: colors.charcoal, lineHeight: 34 },
   headerTitle: { fontSize: typography.sizes.lg, fontWeight: '700', color: colors.charcoal },
-  stepRow: {
-    flexDirection: 'row', alignItems: 'center',
-    paddingHorizontal: spacing.lg, paddingVertical: spacing.sm,
-  },
-  stepDot: {
-    width: 28, height: 28, borderRadius: 14,
-    alignItems: 'center', justifyContent: 'center',
-  },
+  stepRow: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, backgroundColor: colors.cream },
+  stepDot: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   stepActive: { backgroundColor: colors.sand },
-  stepDone: { backgroundColor: colors.success ?? '#2fba89' },
   stepInactive: { backgroundColor: colors.pearl },
   stepNum: { fontSize: typography.sizes.xs, fontWeight: '700', color: colors.white },
   stepLine: { width: 40, height: 2, backgroundColor: colors.pearl, marginHorizontal: spacing.xs },
+  stepLineDone: { backgroundColor: colors.sand },
   stepLabel: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.slate },
-  scroll: { paddingHorizontal: spacing.lg },
-  scanSection: {},
-  reviewSection: {},
-  sectionTitle: {
-    fontSize: typography.sizes.xl, fontWeight: '700', color: colors.charcoal,
-    marginTop: spacing.lg, marginBottom: spacing.xs,
-  },
+  scroll: { padding: spacing.lg },
+  sectionTitle: { fontSize: typography.sizes.xl, fontWeight: '700', color: colors.charcoal, marginBottom: spacing.xs },
   sectionSub: { fontSize: typography.sizes.sm, color: colors.slate, lineHeight: 20, marginBottom: spacing.lg },
-  cameraBox: {
-    height: 220, borderRadius: borderRadius.lg,
-    backgroundColor: '#0a0a0a', overflow: 'hidden',
+
+  // Upload box
+  uploadBox: {
+    height: 240, borderRadius: borderRadius.lg, backgroundColor: colors.cream,
+    borderWidth: 2, borderColor: colors.pearl, borderStyle: 'dashed',
+    alignItems: 'center', justifyContent: 'center', marginBottom: spacing.lg,
+    position: 'relative', overflow: 'hidden',
+  },
+  uploadBoxScanning: { borderColor: colors.gold },
+  uploadContent: { alignItems: 'center', paddingHorizontal: spacing.lg },
+  uploadEmoji: { fontSize: 52, marginBottom: spacing.sm },
+  uploadTitle: { fontSize: typography.sizes.lg, fontWeight: '700', color: colors.charcoal, textAlign: 'center', marginBottom: spacing.xs },
+  uploadSub: { fontSize: typography.sizes.sm, color: colors.slate, textAlign: 'center', marginBottom: spacing.md },
+  uploadBtn: {
+    backgroundColor: colors.sand, borderRadius: borderRadius.full,
+    paddingHorizontal: spacing.lg, paddingVertical: spacing.sm,
+  },
+  uploadBtnText: { fontSize: typography.sizes.sm, fontWeight: '700', color: colors.white },
+  scanningContent: { alignItems: 'center', gap: spacing.md },
+  scanText: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.sand },
+
+  // Preview
+  previewBox: {
+    height: 220, borderRadius: borderRadius.lg, overflow: 'hidden',
     marginBottom: spacing.lg, position: 'relative',
   },
-  cameraCornerTL: {
-    position: 'absolute', top: 16, left: 16,
-    width: 32, height: 32,
-    borderTopWidth: 3, borderLeftWidth: 3, borderColor: colors.sand,
-    borderTopLeftRadius: 4,
+  previewImage: { width: '100%', height: '100%' },
+  scanOverlay: {
+    ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(15,69,34,0.7)',
+    alignItems: 'center', justifyContent: 'center', gap: spacing.md,
   },
-  cameraCornerTR: {
-    position: 'absolute', top: 16, right: 16,
-    width: 32, height: 32,
-    borderTopWidth: 3, borderRightWidth: 3, borderColor: colors.sand,
-    borderTopRightRadius: 4,
+  scanLine: {
+    position: 'absolute', left: 20, right: 20, height: 2,
+    backgroundColor: colors.gold, top: '50%',
   },
-  cameraCornerBL: {
-    position: 'absolute', bottom: 16, left: 16,
-    width: 32, height: 32,
-    borderBottomWidth: 3, borderLeftWidth: 3, borderColor: colors.sand,
-    borderBottomLeftRadius: 4,
+
+  // Corner frames
+  cornerTL: { position: 'absolute', top: 12, left: 12, width: 28, height: 28, borderTopWidth: 3, borderLeftWidth: 3, borderColor: colors.sand, borderTopLeftRadius: 4 },
+  cornerTR: { position: 'absolute', top: 12, right: 12, width: 28, height: 28, borderTopWidth: 3, borderRightWidth: 3, borderColor: colors.sand, borderTopRightRadius: 4 },
+  cornerBL: { position: 'absolute', bottom: 12, left: 12, width: 28, height: 28, borderBottomWidth: 3, borderLeftWidth: 3, borderColor: colors.sand, borderBottomLeftRadius: 4 },
+  cornerBR: { position: 'absolute', bottom: 12, right: 12, width: 28, height: 28, borderBottomWidth: 3, borderRightWidth: 3, borderColor: colors.sand, borderBottomRightRadius: 4 },
+
+  // Feature list
+  featureList: { marginBottom: spacing.lg },
+  featureRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: spacing.xs },
+  featureTick: { fontSize: 16, marginRight: spacing.sm },
+  featureText: { fontSize: typography.sizes.sm, color: colors.charcoal },
+
+  // OCR success
+  ocrSuccessBanner: {
+    flexDirection: 'row', alignItems: 'center', gap: spacing.md,
+    backgroundColor: '#e8f5ee', borderRadius: borderRadius.md,
+    padding: spacing.md, marginBottom: spacing.lg,
+    borderLeftWidth: 4, borderLeftColor: colors.sand,
   },
-  cameraCornerBR: {
-    position: 'absolute', bottom: 16, right: 16,
-    width: 32, height: 32,
-    borderBottomWidth: 3, borderRightWidth: 3, borderColor: colors.sand,
-    borderBottomRightRadius: 4,
+  ocrSuccessIcon: { fontSize: 28 },
+  ocrSuccessTitle: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.charcoal },
+  ocrSuccessSub: { fontSize: typography.sizes.xs, color: colors.slate },
+
+  formCard: {
+    backgroundColor: colors.cream, borderRadius: borderRadius.lg,
+    padding: spacing.md, marginBottom: spacing.lg,
+    borderWidth: 1, borderColor: colors.pearl,
   },
-  cameraPlaceholder: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  cameraEmoji: { fontSize: 56, marginBottom: spacing.sm },
-  cameraHint: { fontSize: typography.sizes.sm, color: '#888' },
-  scanningOverlay: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
-  scanningText: { fontSize: typography.sizes.sm, color: colors.sand },
-  ocrBadge: {
-    backgroundColor: '#e6f9f3', borderRadius: borderRadius.md,
-    padding: spacing.sm, marginBottom: spacing.lg,
-  },
-  ocrBadgeText: { fontSize: typography.sizes.sm, color: '#1a7a5a', fontWeight: '600' },
-  fieldGroup: { marginBottom: spacing.md },
-  fieldLabel: {
-    fontSize: typography.sizes.sm, fontWeight: '600',
-    color: colors.charcoal, marginBottom: spacing.xs,
-  },
-  input: {
-    borderWidth: 1, borderColor: colors.pearl, borderRadius: borderRadius.md,
-    paddingHorizontal: spacing.md, paddingVertical: 12,
-    fontSize: typography.sizes.md, color: colors.charcoal,
-    backgroundColor: colors.white,
-  },
-  btn: {
+  registerBtn: {
     backgroundColor: colors.sand, borderRadius: borderRadius.lg,
-    paddingVertical: 14, alignItems: 'center', marginTop: spacing.sm,
+    paddingVertical: 15, alignItems: 'center', marginBottom: spacing.sm,
     ...shadows.md,
   },
-  btnDisabled: { opacity: 0.6 },
-  btnText: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.white },
+  registerBtnText: { fontSize: typography.sizes.md, fontWeight: '700', color: colors.white, letterSpacing: 0.5 },
   skipBtn: { alignItems: 'center', paddingVertical: spacing.md },
   skipText: { fontSize: typography.sizes.sm, color: colors.slate },
 });
