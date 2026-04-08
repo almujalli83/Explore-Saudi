@@ -119,7 +119,7 @@ export default function AccommodationScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.white },
-  filterRow: { paddingHorizontal: spacing.md, paddingBottom: spacing.sm },
+  filterRow: { paddingHorizontal: spacing.md, paddingTop: spacing.sm, paddingBottom: spacing.sm },
   list: { padding: spacing.md, paddingBottom: 100 },
   card: {
     flexDirection: 'row', backgroundColor: colors.white,
