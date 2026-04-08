@@ -7,6 +7,9 @@ import AttractionDetailScreen from '../screens/explore/AttractionDetailScreen';
 import HotelDetailScreen from '../screens/accommodation/HotelDetailScreen';
 import HotelReservationScreen from '../screens/accommodation/HotelReservationScreen';
 import DigitalCheckInScreen from '../screens/accommodation/DigitalCheckInScreen';
+import AccommodationScreen from '../screens/accommodation/AccommodationScreen';
+import DiningScreen from '../screens/dining/DiningScreen';
+import ShoppingScreen from '../screens/shopping/ShoppingScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +23,9 @@ export default function HomeStack() {
       <Stack.Screen name="HotelDetail" component={HotelDetailScreen} />
       <Stack.Screen name="HotelReservation" component={HotelReservationScreen} />
       <Stack.Screen name="DigitalCheckIn" component={DigitalCheckInScreen} />
+      <Stack.Screen name="Accommodation" component={AccommodationScreen} />
+      <Stack.Screen name="Dining" component={DiningScreen} />
+      <Stack.Screen name="Shopping" component={ShoppingScreen} />
     </Stack.Navigator>
   );
 }

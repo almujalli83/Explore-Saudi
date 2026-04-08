@@ -202,7 +202,7 @@ export default function HomeScreen() {
               key={cat.id}
               style={styles.catItem}
               onPress={() => {
-                if (cat.route) navigation.getParent()?.navigate(cat.tab, { screen: cat.route });
+                if (cat.route) navigation.navigate(cat.route);
                 else navigation.getParent()?.navigate(cat.tab);
               }}
             >
@@ -252,7 +252,7 @@ export default function HomeScreen() {
         {/* ── Top Hotels ─────────────────────────────────────────────── */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Top Hotels</Text>
-          <TouchableOpacity onPress={() => navigation.getParent()?.navigate('ExploreTab', { screen: 'Accommodation' })}>
+          <TouchableOpacity onPress={() => navigation.navigate('Accommodation')}>
             <Text style={styles.seeAll}>See All</Text>
           </TouchableOpacity>
         </View>
