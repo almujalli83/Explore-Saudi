@@ -74,23 +74,6 @@ export const entertainmentVenues = [
     features: ['Ice Skating', 'Snow Park', 'Carnival Rides', 'Live Shows', 'Food Stalls'],
   },
   {
-    id: 'ev5',
-    name: 'Via Riyadh',
-    nameAr: 'فيا الرياض',
-    description: 'An upscale lifestyle destination in Riyadh combining luxury shopping, fine dining, and entertainment in a stunning architectural setting inspired by European piazzas.',
-    type: 'entertainment_complex' as const,
-    images: ['https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/BSM_2571.jpg/800px-BSM_2571.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Riyadh_Skyline_showing_the_pointed_Al_Faisaliyah_Center_tower_and_the_Kingdom_Centre_skyscraper_with_its_sky_bridge_-_panoramio.jpg/800px-Riyadh_Skyline_showing_the_pointed_Al_Faisaliyah_Center_tower_and_the_Kingdom_Centre_skyscraper_with_its_sky_bridge_-_panoramio.jpg'],
-    city: 'Riyadh',
-    latitude: 24.7200,
-    longitude: 46.6700,
-    ticketTypes: [
-      { id: 'tt11', name: 'Free Entry', price: 0, currency: 'SAR', description: 'Open access to public areas', available: 10000 },
-    ],
-    rating: 4.6,
-    openingHours: '10:00 AM - 12:00 AM',
-    features: ['Luxury Dining', 'Designer Shopping', 'Art Galleries', 'Water Features', 'Events Space'],
-  },
-  {
     id: 'ev6',
     name: 'Maraya Concert Hall',
     nameAr: 'قاعة مرايا',

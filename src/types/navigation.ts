@@ -21,6 +21,10 @@ export type HomeStackParamList = {
   Home: undefined;
   Notifications: undefined;
   Search: undefined;
+  AttractionDetail: { id: string };
+  HotelDetail: { id: string };
+  HotelReservation: { hotelId: string; roomName: string | null };
+  DigitalCheckIn: { hotelName: string; roomNumber: string; checkIn: string; checkOut: string };
 };
 
 export type ExploreStackParamList = {

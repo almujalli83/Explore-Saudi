@@ -64,14 +64,12 @@ export default function HomeScreen() {
   const featuredExperiences = allFeatured.slice(0, 5);
   const featuredIds = new Set(featuredExperiences.map((a) => a.id));
   const recommended = allFeatured.filter((a) => !featuredIds.has(a.id)).slice(0, 4);
-  const usedIds = new Set([...featuredIds, ...recommended.map((a) => a.id)]);
-  const popularDestinations = attractions.filter((a) => !usedIds.has(a.id)).slice(0, 6);
   const leftRec  = recommended.filter((_, i) => i % 2 === 0);
   const rightRec = recommended.filter((_, i) => i % 2 !== 0);
   const topHotels = [...hotels].sort((a, b) => b.rating - a.rating).slice(0, 4);
 
   const goToDetail = (id: string) =>
-    navigation.getParent()?.navigate('ExploreTab', { screen: 'AttractionDetail', params: { id } });
+    navigation.navigate('AttractionDetail', { id });
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -251,35 +249,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* ── Places to Visit ─────────────────────────────────────────── */}
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Places to Visit</Text>
-          <TouchableOpacity onPress={() => navigation.getParent()?.navigate('ExploreTab')}>
-            <Text style={styles.seeAll}>See All</Text>
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={popularDestinations}
-          horizontal
-          nestedScrollEnabled
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.placeList}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity style={styles.placeCard} onPress={() => goToDetail(item.id)} activeOpacity={0.85}>
-              <Image source={{ uri: item.images[0] }} style={styles.placeImg} contentFit="cover" transition={200} />
-              <View style={styles.placeInfo}>
-                <Text style={styles.placeName} numberOfLines={1}>{item.name}</Text>
-                <Text style={styles.placeCity} numberOfLines={1}>📍 {item.city}</Text>
-                <View style={styles.placeMeta}>
-                  <Text style={styles.placeStar}>⭐ {item.rating.toFixed(1)}</Text>
-                  <Text style={styles.placePrice}>{item.price === 0 ? 'Free' : `SAR ${item.price}`}</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
-
         {/* ── Top Hotels ─────────────────────────────────────────────── */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Top Hotels</Text>
@@ -297,7 +266,7 @@ export default function HomeScreen() {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.placeCard}
-              onPress={() => navigation.getParent()?.navigate('ExploreTab', { screen: 'HotelDetail', params: { id: item.id } })}
+              onPress={() => navigation.navigate('HotelDetail', { id: item.id })}
               activeOpacity={0.85}
             >
               <Image source={{ uri: item.images[0] }} style={styles.placeImg} contentFit="cover" transition={200} />
