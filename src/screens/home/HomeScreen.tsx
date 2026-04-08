@@ -69,7 +69,7 @@ export default function HomeScreen() {
   const topHotels = [...hotels].sort((a, b) => b.rating - a.rating).slice(0, 4);
 
   const goToDetail = (id: string) =>
-    navigation.navigate('AttractionDetail', { id });
+    navigation.push('AttractionDetail', { id });
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -266,7 +266,7 @@ export default function HomeScreen() {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.placeCard}
-              onPress={() => navigation.navigate('HotelDetail', { id: item.id })}
+              onPress={() => navigation.push('HotelDetail', { id: item.id })}
               activeOpacity={0.85}
             >
               <Image source={{ uri: item.images[0] }} style={styles.placeImg} contentFit="cover" transition={200} />

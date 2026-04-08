@@ -24,7 +24,7 @@ export const attractions: Attraction[] = [
     description:
       'A UNESCO World Heritage Site and the birthplace of the first Saudi state. The mud-brick ruins of At-Turaif palace district offer a fascinating glimpse into 18th-century Arabian architecture and governance. Ongoing restoration has transformed the area into a world-class cultural destination.',
     category: 'heritage',
-    images: ['https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/29683032/pexels-photo-29683032.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5854322/pexels-photo-5854322.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 3842,
     price: 75,
@@ -42,7 +42,7 @@ export const attractions: Attraction[] = [
     description:
       'Saudi Arabia\'s first UNESCO World Heritage Site featuring over 100 monumental Nabataean tombs carved into sandstone outcrops. Often compared to Petra in Jordan, Hegra served as the southern capital of the Nabataean kingdom. The site spans 52 hectares in the AlUla desert landscape.',
     category: 'heritage',
-    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/50628/pexels-photo-50628.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.9,
     reviewCount: 5210,
     price: 95,
@@ -60,7 +60,7 @@ export const attractions: Attraction[] = [
     description:
       'A UNESCO World Heritage Site showcasing traditional Hejazi architecture with ornate coral-stone buildings and iconic wooden Roshan balconies. The district served as a gateway for pilgrims traveling to Makkah for centuries. Wander narrow alleyways filled with souqs, heritage houses, and vibrant street art.',
     category: 'heritage',
-    images: ['https://images.pexels.com/photos/29683032/pexels-photo-29683032.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/5854322/pexels-photo-5854322.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 4120,
     price: 0,
@@ -78,7 +78,7 @@ export const attractions: Attraction[] = [
     description:
       'A stunning mountain village in the Asir region known for its colorful multi-story stone towers decorated with quartz and vibrant murals. Rijal Almaa has been nominated as a UNESCO World Heritage Site and offers insight into the unique culture of the southern highlands. The village museum houses over 2,800 artifacts.',
     category: 'heritage',
-    images: ['https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/29683032/pexels-photo-29683032.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5854322/pexels-photo-5854322.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.6,
     reviewCount: 1890,
     price: 20,
@@ -96,7 +96,7 @@ export const attractions: Attraction[] = [
     description:
       'A dramatic 300-meter cliff edge overlooking an endless expanse of ancient seabed in the Tuwaiq Escarpment northwest of Riyadh. The breathtaking panoramic views make it one of Saudi Arabia\'s most photographed natural landmarks. Accessible via a scenic desert drive, it is best visited during cooler months.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/50628/pexels-photo-50628.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.8,
     reviewCount: 6340,
     price: 0,
@@ -186,7 +186,7 @@ export const attractions: Attraction[] = [
     description:
       'The largest contiguous sand desert in the world stretching across 650,000 square kilometers of the Arabian Peninsula. The towering red sand dunes reach heights of over 250 meters, creating an otherworldly landscape. Desert safari tours offer dune bashing, camel rides, and unforgettable stargazing under pristine dark skies.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/50628/pexels-photo-50628.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 2340,
     price: 0,
@@ -204,7 +204,7 @@ export const attractions: Attraction[] = [
     description:
       'A pristine archipelago of over 80 coral islands in the Red Sea off the coast of Jazan, renowned for incredible marine biodiversity. The islands feature mangrove forests, Ottoman-era ruins, and some of the best snorkeling and diving in Saudi Arabia. The Farasan gazelle and diverse bird species make it a nature lover\'s paradise.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/3100361/pexels-photo-3100361.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17652296/pexels-photo-17652296.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5967950/pexels-photo-5967950.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/3100361/pexels-photo-3100361.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28829633/pexels-photo-28829633.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5004002/pexels-photo-5004002.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.6,
     reviewCount: 1450,
     price: 0,
@@ -222,7 +222,7 @@ export const attractions: Attraction[] = [
     description:
       'A massive volcanic crater 250 meters deep and 2 kilometers in diameter with a striking white sodium phosphate crystal floor. Located in the Hejaz region, the crater is believed to have formed from a phreatic steam explosion. The hike down to the crater floor takes about 45 minutes and rewards visitors with surreal landscapes.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/50628/pexels-photo-50628.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 2870,
     price: 0,
@@ -240,7 +240,7 @@ export const attractions: Attraction[] = [
     description:
       'A breathtaking narrow canyon in the Jizan Province with towering cliff walls rising over 300 meters on either side of a flowing stream. Lush vegetation and small waterfalls create an unexpected oasis in the arid Arabian landscape. The canyon is a popular hiking destination and one of Saudi Arabia\'s most dramatic natural wonders.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 1980,
     price: 0,
@@ -258,7 +258,7 @@ export const attractions: Attraction[] = [
     description:
       'The highest point in Saudi Arabia at approximately 3,015 meters above sea level in the Asir Mountains near Abha. The cool mountain climate, terraced agriculture, and misty juniper forests make it a unique escape from the desert heat. A cable car offers stunning views over the Tihama plains far below.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/50628/pexels-photo-50628.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.6,
     reviewCount: 3450,
     price: 30,
@@ -276,7 +276,7 @@ export const attractions: Attraction[] = [
     description:
       'The holiest mosque in Islam and the largest mosque in the world, surrounding the sacred Kaaba in the heart of Makkah. Millions of Muslims visit annually for Hajj and Umrah pilgrimages, making it the most visited site on Earth. The grand mosque can accommodate over 2 million worshippers during peak seasons.',
     category: 'religious',
-    images: ['https://images.pexels.com/photos/12777419/pexels-photo-12777419.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/4346403/pexels-photo-4346403.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18274181/pexels-photo-18274181.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/13294978/pexels-photo-13294978.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/2895295/pexels-photo-2895295.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18274179/pexels-photo-18274179.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 5.0,
     reviewCount: 52000,
     price: 0,
@@ -294,7 +294,7 @@ export const attractions: Attraction[] = [
     description:
       'The second holiest mosque in Islam, originally built by Prophet Muhammad (PBUH) and located in the heart of Madinah. The mosque features the iconic Green Dome and can accommodate over 1 million worshippers. Its serene courtyards with retractable umbrellas provide shade during the intense summer heat.',
     category: 'religious',
-    images: ['https://images.pexels.com/photos/18967069/pexels-photo-18967069.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/34642005/pexels-photo-34642005.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/13630787/pexels-photo-13630787.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/32822914/pexels-photo-32822914.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/34642005/pexels-photo-34642005.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/13311030/pexels-photo-13311030.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 5.0,
     reviewCount: 48000,
     price: 0,
@@ -312,7 +312,7 @@ export const attractions: Attraction[] = [
     description:
       'The first mosque ever built in Islam, founded by Prophet Muhammad (PBUH) upon his arrival in Madinah during the Hijra. Praying two rak\'ahs at Quba Mosque is equivalent to performing Umrah according to Islamic tradition. The mosque has been extensively expanded and renovated into a beautiful modern structure.',
     category: 'religious',
-    images: ['https://images.pexels.com/photos/6099936/pexels-photo-6099936.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17864312/pexels-photo-17864312.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/19509209/pexels-photo-19509209.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/6099936/pexels-photo-6099936.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/31744093/pexels-photo-31744093.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/19509209/pexels-photo-19509209.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.9,
     reviewCount: 12500,
     price: 0,
@@ -330,7 +330,7 @@ export const attractions: Attraction[] = [
     description:
       'The largest museum in the kingdom located in the King Abdulaziz Historical Center in central Riyadh. Its eight galleries span the full sweep of Arabian history from prehistoric times through the unification of Saudi Arabia. Interactive exhibits, rare artifacts, and immersive displays make it an essential cultural visit.',
     category: 'museum',
-    images: ['https://images.pexels.com/photos/26424632/pexels-photo-26424632.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35298122/pexels-photo-35298122.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5625713/pexels-photo-5625713.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/18426842/pexels-photo-18426842.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/34642005/pexels-photo-34642005.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5625713/pexels-photo-5625713.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 6780,
     price: 10,
@@ -348,7 +348,7 @@ export const attractions: Attraction[] = [
     description:
       'A striking landmark cultural center in Dhahran built by Saudi Aramco, designed to look like a stack of pebbles. Ithra houses a museum, cinema, library, theater, and exhibition halls promoting arts, knowledge, and creativity. It was named one of Time magazine\'s 100 Greatest Places in the World.',
     category: 'museum',
-    images: ['https://images.pexels.com/photos/35298122/pexels-photo-35298122.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/26424632/pexels-photo-26424632.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/34642005/pexels-photo-34642005.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18426842/pexels-photo-18426842.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 4560,
     price: 0,
@@ -366,7 +366,7 @@ export const attractions: Attraction[] = [
     description:
       'A clay and mud-brick fort in the heart of old Riyadh where King Abdulaziz recaptured the city in 1902, marking the beginning of modern Saudi Arabia. The fortress now serves as a museum with displays of maps, photographs, and artifacts from the unification era. Visitors can still see the spearhead lodged in the main gate from the historic battle.',
     category: 'museum',
-    images: ['https://images.pexels.com/photos/26424632/pexels-photo-26424632.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35298122/pexels-photo-35298122.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/18426842/pexels-photo-18426842.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/34642005/pexels-photo-34642005.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.4,
     reviewCount: 5890,
     price: 0,
@@ -384,7 +384,7 @@ export const attractions: Attraction[] = [
     description:
       'A stunning natural sandstone formation in AlUla that remarkably resembles an elephant with its trunk reaching to the ground. Millions of years of wind and water erosion sculpted this geological marvel standing over 50 meters tall. The site is especially magical at sunset when the rock glows in warm amber tones.',
     category: 'nature',
-    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/459319/pexels-photo-459319.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/50628/pexels-photo-50628.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.8,
     reviewCount: 3670,
     price: 50,
