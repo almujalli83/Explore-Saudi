@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   filterIconText: { fontSize: 18 },
 
   // Filter pills
-  filterRow: { paddingHorizontal: spacing.md, paddingBottom: spacing.sm, gap: spacing.sm },
+  filterRow: { paddingHorizontal: spacing.md, paddingTop: spacing.sm, paddingBottom: spacing.sm, gap: spacing.sm },
   filterPill: {
     paddingVertical: spacing.xs + 2, paddingHorizontal: spacing.md + 4,
     borderRadius: borderRadius.full,

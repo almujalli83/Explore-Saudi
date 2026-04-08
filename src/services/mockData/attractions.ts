@@ -24,11 +24,7 @@ export const attractions: Attraction[] = [
     description:
       'A UNESCO World Heritage Site and the birthplace of the first Saudi state. The mud-brick ruins of At-Turaif palace district offer a fascinating glimpse into 18th-century Arabian architecture and governance. Ongoing restoration has transformed the area into a world-class cultural destination.',
     category: 'heritage',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/At-Turaif_District_of_Diriyah%2C_Saudi_Arabia.jpg/800px-At-Turaif_District_of_Diriyah%2C_Saudi_Arabia.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/At-Turaif_District.jpg/800px-At-Turaif_District.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Salwa_Palace_in_Diriyah.png/800px-Salwa_Palace_in_Diriyah.png',
-    ],
+    images: ['https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/29683032/pexels-photo-29683032.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 3842,
     price: 75,
@@ -46,11 +42,7 @@ export const attractions: Attraction[] = [
     description:
       'Saudi Arabia\'s first UNESCO World Heritage Site featuring over 100 monumental Nabataean tombs carved into sandstone outcrops. Often compared to Petra in Jordan, Hegra served as the southern capital of the Nabataean kingdom. The site spans 52 hectares in the AlUla desert landscape.',
     category: 'heritage',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Qasr_al_Farid.JPG/800px-Qasr_al_Farid.JPG',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Madain_Saleh_%286720185645%29.jpg/800px-Madain_Saleh_%286720185645%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hegra%2C_Al-Ula%2C_Saudi_Arabia.png/800px-Hegra%2C_Al-Ula%2C_Saudi_Arabia.png',
-    ],
+    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.9,
     reviewCount: 5210,
     price: 95,
@@ -68,11 +60,7 @@ export const attractions: Attraction[] = [
     description:
       'A UNESCO World Heritage Site showcasing traditional Hejazi architecture with ornate coral-stone buildings and iconic wooden Roshan balconies. The district served as a gateway for pilgrims traveling to Makkah for centuries. Wander narrow alleyways filled with souqs, heritage houses, and vibrant street art.',
     category: 'heritage',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Old_Jeddah_%28Al_Balad%29_architecture_3_Feb_2022.jpg/800px-Old_Jeddah_%28Al_Balad%29_architecture_3_Feb_2022.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Bayt_Nasif%2C_1872%2C_old_Jeddah%2C_Saudi_Arabia_%285%29_%2850703484406%29.jpg/800px-Bayt_Nasif%2C_1872%2C_old_Jeddah%2C_Saudi_Arabia_%285%29_%2850703484406%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Jokhdar_House_2024.jpg/800px-Jokhdar_House_2024.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/29683032/pexels-photo-29683032.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 4120,
     price: 0,
@@ -90,11 +78,7 @@ export const attractions: Attraction[] = [
     description:
       'A stunning mountain village in the Asir region known for its colorful multi-story stone towers decorated with quartz and vibrant murals. Rijal Almaa has been nominated as a UNESCO World Heritage Site and offers insight into the unique culture of the southern highlands. The village museum houses over 2,800 artifacts.',
     category: 'heritage',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Rijal_Almaa_During_the_Day_2020.jpg/800px-Rijal_Almaa_During_the_Day_2020.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Rijal_Almaa_at_Night_2019.jpg/800px-Rijal_Almaa_at_Night_2019.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Rijal_Alma_village_from_the_inside%2C_2021.jpg/800px-Rijal_Alma_village_from_the_inside%2C_2021.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/29683032/pexels-photo-29683032.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.6,
     reviewCount: 1890,
     price: 20,
@@ -112,11 +96,7 @@ export const attractions: Attraction[] = [
     description:
       'A dramatic 300-meter cliff edge overlooking an endless expanse of ancient seabed in the Tuwaiq Escarpment northwest of Riyadh. The breathtaking panoramic views make it one of Saudi Arabia\'s most photographed natural landmarks. Accessible via a scenic desert drive, it is best visited during cooler months.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Tuwaiq_Escarpment%2C_Riyadh_%28cropped%29.jpg/800px-Tuwaiq_Escarpment%2C_Riyadh_%28cropped%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Wahbah_Crater_Panorama.JPG/800px-Wahbah_Crater_Panorama.JPG',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Rub_al_Khali_002.JPG/800px-Rub_al_Khali_002.JPG',
-    ],
+    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.8,
     reviewCount: 6340,
     price: 0,
@@ -134,11 +114,7 @@ export const attractions: Attraction[] = [
     description:
       'The iconic 302-meter skyscraper dominating the Riyadh skyline with its distinctive inverted parabolic arch at the summit. The Sky Bridge observation deck offers 360-degree views of the sprawling capital city. The tower houses luxury shopping, the Four Seasons Hotel, and premium office space.',
     category: 'modern',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/en/thumb/b/b2/Kingdom_Centre_Riyadh_2024.jpeg/800px-Kingdom_Centre_Riyadh_2024.jpeg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/KAFD_January_2025.jpg/800px-KAFD_January_2025.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/KAFD_seen_from_North_east_side_of_Riyadh_City.jpg/800px-KAFD_seen_from_North_east_side_of_Riyadh_City.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/35761/pexels-photo-35761.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/31849529/pexels-photo-31849529.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 8920,
     price: 69,
@@ -156,11 +132,7 @@ export const attractions: Attraction[] = [
     description:
       'A futuristic mega-development spanning 1.6 million square meters in northern Riyadh featuring striking contemporary architecture. KAFD serves as the kingdom\'s financial hub with towers, conference centers, and landscaped plazas. The district includes the iconic KAFD Grand Mosque with its geometric design.',
     category: 'modern',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/KAFD_January_2025.jpg/800px-KAFD_January_2025.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/KAFD_seen_from_North_east_side_of_Riyadh_City.jpg/800px-KAFD_seen_from_North_east_side_of_Riyadh_City.jpg',
-      'https://upload.wikimedia.org/wikipedia/en/thumb/b/b2/Kingdom_Centre_Riyadh_2024.jpeg/800px-Kingdom_Centre_Riyadh_2024.jpeg',
-    ],
+    images: ['https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/31849529/pexels-photo-31849529.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5625713/pexels-photo-5625713.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.4,
     reviewCount: 2150,
     price: 0,
@@ -178,11 +150,7 @@ export const attractions: Attraction[] = [
     description:
       'A revolutionary 170-kilometer linear city being built in Tabuk Province as part of the NEOM mega-project. The Line aims to house 9 million residents in a structure just 200 meters wide with no cars and zero carbon emissions. Visitor experiences showcase the bold vision through immersive exhibitions.',
     category: 'modern',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Red_Sea_Coral.jpg/800px-Red_Sea_Coral.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Red_Sea_2.jpg/800px-Red_Sea_2.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/ISS036-E-48658_-_View_of_Saudi_Arabia.jpg/800px-ISS036-E-48658_-_View_of_Saudi_Arabia.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/31849529/pexels-photo-31849529.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5625713/pexels-photo-5625713.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35761/pexels-photo-35761.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.3,
     reviewCount: 980,
     price: 150,
@@ -200,11 +168,7 @@ export const attractions: Attraction[] = [
     description:
       'The tallest fountain in the world, shooting water up to 312 meters into the air along the Jeddah Corniche. The fountain is best viewed at night when illuminated by over 500 spotlights creating a spectacular light show. It has been a beloved Jeddah landmark since its inauguration in 1985.',
     category: 'modern',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/BSM_2571.jpg/800px-BSM_2571.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/King_Fahd%E2%80%99s_Fountain.jpg/800px-King_Fahd%E2%80%99s_Fountain.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Old_Jeddah_%28Al_Balad%29_architecture_3_Feb_2022.jpg/800px-Old_Jeddah_%28Al_Balad%29_architecture_3_Feb_2022.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/5625713/pexels-photo-5625713.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35761/pexels-photo-35761.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.4,
     reviewCount: 7650,
     price: 0,
@@ -222,11 +186,7 @@ export const attractions: Attraction[] = [
     description:
       'The largest contiguous sand desert in the world stretching across 650,000 square kilometers of the Arabian Peninsula. The towering red sand dunes reach heights of over 250 meters, creating an otherworldly landscape. Desert safari tours offer dune bashing, camel rides, and unforgettable stargazing under pristine dark skies.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Rub_al_Khali_002.JPG/800px-Rub_al_Khali_002.JPG',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rub_al_Khali_001.JPG/800px-Rub_al_Khali_001.JPG',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Rub_al_khali_sunset_Nov_2007.jpg/800px-Rub_al_khali_sunset_Nov_2007.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 2340,
     price: 0,
@@ -244,11 +204,7 @@ export const attractions: Attraction[] = [
     description:
       'A pristine archipelago of over 80 coral islands in the Red Sea off the coast of Jazan, renowned for incredible marine biodiversity. The islands feature mangrove forests, Ottoman-era ruins, and some of the best snorkeling and diving in Saudi Arabia. The Farasan gazelle and diverse bird species make it a nature lover\'s paradise.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Farasan_Island_3.jpg/800px-Farasan_Island_3.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Dumsuk_Island2.jpg/800px-Dumsuk_Island2.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Al-Qandal_Forest%2C_Farasan_Governorate_in_Saudi_Arabia%2C_2024.jpg/800px-Al-Qandal_Forest%2C_Farasan_Governorate_in_Saudi_Arabia%2C_2024.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/3100361/pexels-photo-3100361.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17652296/pexels-photo-17652296.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5967950/pexels-photo-5967950.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.6,
     reviewCount: 1450,
     price: 0,
@@ -266,11 +222,7 @@ export const attractions: Attraction[] = [
     description:
       'A massive volcanic crater 250 meters deep and 2 kilometers in diameter with a striking white sodium phosphate crystal floor. Located in the Hejaz region, the crater is believed to have formed from a phreatic steam explosion. The hike down to the crater floor takes about 45 minutes and rewards visitors with surreal landscapes.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Wahbah_Crater.jpg/800px-Wahbah_Crater.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Al_Wahba_Crater_High_Res.jpg/800px-Al_Wahba_Crater_High_Res.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Wahbah_Crater_From_An_Airplane.jpg/800px-Wahbah_Crater_From_An_Airplane.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 2870,
     price: 0,
@@ -288,11 +240,7 @@ export const attractions: Attraction[] = [
     description:
       'A breathtaking narrow canyon in the Jizan Province with towering cliff walls rising over 300 meters on either side of a flowing stream. Lush vegetation and small waterfalls create an unexpected oasis in the arid Arabian landscape. The canyon is a popular hiking destination and one of Saudi Arabia\'s most dramatic natural wonders.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Lajb_valley_1.jpg/800px-Lajb_valley_1.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Lajb_valley_2.jpg/800px-Lajb_valley_2.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Lajb_valley_3.jpg/800px-Lajb_valley_3.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 1980,
     price: 0,
@@ -310,11 +258,7 @@ export const attractions: Attraction[] = [
     description:
       'The highest point in Saudi Arabia at approximately 3,015 meters above sea level in the Asir Mountains near Abha. The cool mountain climate, terraced agriculture, and misty juniper forests make it a unique escape from the desert heat. A cable car offers stunning views over the Tihama plains far below.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Soudah.jpg/800px-Soudah.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Asir_Mountains.jpg/800px-Asir_Mountains.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Abha.jpg/800px-Abha.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/28639219/pexels-photo-28639219.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18672830/pexels-photo-18672830.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.6,
     reviewCount: 3450,
     price: 30,
@@ -332,11 +276,7 @@ export const attractions: Attraction[] = [
     description:
       'The holiest mosque in Islam and the largest mosque in the world, surrounding the sacred Kaaba in the heart of Makkah. Millions of Muslims visit annually for Hajj and Umrah pilgrimages, making it the most visited site on Earth. The grand mosque can accommodate over 2 million worshippers during peak seasons.',
     category: 'religious',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Great_Mosque_of_Mecca1.jpg/800px-Great_Mosque_of_Mecca1.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/The_Kabah_in_the_Grand_Mosque_of_Makkah%2C_Saudi_Arabia_%2852501405646%29.jpg/800px-The_Kabah_in_the_Grand_Mosque_of_Makkah%2C_Saudi_Arabia_%2852501405646%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Masjid_al-Haram_2022.jpg/800px-Masjid_al-Haram_2022.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/12777419/pexels-photo-12777419.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/4346403/pexels-photo-4346403.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/18274181/pexels-photo-18274181.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 5.0,
     reviewCount: 52000,
     price: 0,
@@ -354,11 +294,7 @@ export const attractions: Attraction[] = [
     description:
       'The second holiest mosque in Islam, originally built by Prophet Muhammad (PBUH) and located in the heart of Madinah. The mosque features the iconic Green Dome and can accommodate over 1 million worshippers. Its serene courtyards with retractable umbrellas provide shade during the intense summer heat.',
     category: 'religious',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Masjid_Nabawi_The_Prophet%27s_Mosque%2C_Madina.jpg/800px-Masjid_Nabawi_The_Prophet%27s_Mosque%2C_Madina.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/The_Green_Dome%2C_Masjid_Nabawi%2C_Madina.jpg/800px-The_Green_Dome%2C_Masjid_Nabawi%2C_Madina.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Al-Masjid_Al-Nabawi_umbrella.jpg/800px-Al-Masjid_Al-Nabawi_umbrella.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/18967069/pexels-photo-18967069.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/34642005/pexels-photo-34642005.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/13630787/pexels-photo-13630787.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 5.0,
     reviewCount: 48000,
     price: 0,
@@ -376,11 +312,7 @@ export const attractions: Attraction[] = [
     description:
       'The first mosque ever built in Islam, founded by Prophet Muhammad (PBUH) upon his arrival in Madinah during the Hijra. Praying two rak\'ahs at Quba Mosque is equivalent to performing Umrah according to Islamic tradition. The mosque has been extensively expanded and renovated into a beautiful modern structure.',
     category: 'religious',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Quba_Mosque_Full_Picture_%282024%29.jpg/800px-Quba_Mosque_Full_Picture_%282024%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Quba_Mosque_Wall_Walkway.jpg/800px-Quba_Mosque_Wall_Walkway.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Masjid_Quba_%28Umroh_Ramadhan_2023%29-4.jpg/800px-Masjid_Quba_%28Umroh_Ramadhan_2023%29-4.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/6099936/pexels-photo-6099936.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17864312/pexels-photo-17864312.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/19509209/pexels-photo-19509209.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.9,
     reviewCount: 12500,
     price: 0,
@@ -398,11 +330,7 @@ export const attractions: Attraction[] = [
     description:
       'The largest museum in the kingdom located in the King Abdulaziz Historical Center in central Riyadh. Its eight galleries span the full sweep of Arabian history from prehistoric times through the unification of Saudi Arabia. Interactive exhibits, rare artifacts, and immersive displays make it an essential cultural visit.',
     category: 'museum',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/National_Museum_Riyadh_%286781666263%29.jpg/800px-National_Museum_Riyadh_%286781666263%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Hand_written_Quran_in_Saudi_Arabia.jpg/800px-Hand_written_Quran_in_Saudi_Arabia.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Masmak_Fort_%2812753717253%29.jpg/800px-Masmak_Fort_%2812753717253%29.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/26424632/pexels-photo-26424632.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35298122/pexels-photo-35298122.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/5625713/pexels-photo-5625713.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.5,
     reviewCount: 6780,
     price: 10,
@@ -420,11 +348,7 @@ export const attractions: Attraction[] = [
     description:
       'A striking landmark cultural center in Dhahran built by Saudi Aramco, designed to look like a stack of pebbles. Ithra houses a museum, cinema, library, theater, and exhibition halls promoting arts, knowledge, and creativity. It was named one of Time magazine\'s 100 Greatest Places in the World.',
     category: 'museum',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/en/thumb/7/78/King_Abdulaziz_Center_for_World_Culture_%28Ithra%29_%28cropped%29.png/800px-King_Abdulaziz_Center_for_World_Culture_%28Ithra%29_%28cropped%29.png',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/National_Museum_Riyadh_%286781666263%29.jpg/800px-National_Museum_Riyadh_%286781666263%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/KAFD_January_2025.jpg/800px-KAFD_January_2025.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/35298122/pexels-photo-35298122.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/26424632/pexels-photo-26424632.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.7,
     reviewCount: 4560,
     price: 0,
@@ -442,11 +366,7 @@ export const attractions: Attraction[] = [
     description:
       'A clay and mud-brick fort in the heart of old Riyadh where King Abdulaziz recaptured the city in 1902, marking the beginning of modern Saudi Arabia. The fortress now serves as a museum with displays of maps, photographs, and artifacts from the unification era. Visitors can still see the spearhead lodged in the main gate from the historic battle.',
     category: 'museum',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Masmak_Fort_%2812753717253%29.jpg/800px-Masmak_Fort_%2812753717253%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Masmak_Citadel%2C_Riyadh_%2814374730992%29.jpg/800px-Masmak_Citadel%2C_Riyadh_%2814374730992%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Masmak_Castle_from_Thumairi.jpg/800px-Masmak_Castle_from_Thumairi.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/26424632/pexels-photo-26424632.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35298122/pexels-photo-35298122.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.4,
     reviewCount: 5890,
     price: 0,
@@ -464,11 +384,7 @@ export const attractions: Attraction[] = [
     description:
       'A stunning natural sandstone formation in AlUla that remarkably resembles an elephant with its trunk reaching to the ground. Millions of years of wind and water erosion sculpted this geological marvel standing over 50 meters tall. The site is especially magical at sunset when the rock glows in warm amber tones.',
     category: 'nature',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Elephant_rock%2C_Al-%27Ula.jpg/800px-Elephant_rock%2C_Al-%27Ula.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Qasr_al_Farid.JPG/800px-Qasr_al_Farid.JPG',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hegra%2C_Al-Ula%2C_Saudi_Arabia.png/800px-Hegra%2C_Al-Ula%2C_Saudi_Arabia.png',
-    ],
+    images: ['https://images.pexels.com/photos/9822971/pexels-photo-9822971.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/68358/pexels-photo-68358.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/17923076/pexels-photo-17923076.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.8,
     reviewCount: 3670,
     price: 50,
@@ -486,11 +402,7 @@ export const attractions: Attraction[] = [
     description:
       'Set to become the world\'s tallest building at over 1,000 meters upon completion, Jeddah Tower is the centerpiece of the Jeddah Economic City development. The sleek triangular design by Adrian Smith draws inspiration from desert plant shoots. Visitors can view the construction progress from designated observation areas.',
     category: 'modern',
-    images: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Jeddah_Tower_in_its_88th_floor_%28cropped%29.jpg/800px-Jeddah_Tower_in_its_88th_floor_%28cropped%29.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Jeddah_Tower_2025.jpg/800px-Jeddah_Tower_2025.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Jeddah_Tower_Building_Progress_as_of_13-Jul-2016_004.jpg/800px-Jeddah_Tower_Building_Progress_as_of_13-Jul-2016_004.jpg',
-    ],
+    images: ['https://images.pexels.com/photos/31849529/pexels-photo-31849529.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/30320202/pexels-photo-30320202.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/35761/pexels-photo-35761.jpeg?auto=compress&cs=tinysrgb&w=800'],
     rating: 4.0,
     reviewCount: 890,
     price: 0,
