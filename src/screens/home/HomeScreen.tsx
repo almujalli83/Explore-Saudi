@@ -19,12 +19,13 @@ import { colors, typography, spacing, borderRadius, shadows } from '../../consta
 import { SCREEN_WIDTH } from '../../constants/layout';
 import { useAuthStore } from '../../store/useAuthStore';
 import { attractions } from '../../services/mockData/attractions';
+import { hotels } from '../../services/mockData/hotels';
 
 const CATS = [
-  { id: '1', icon: '🏛️', label: 'Heritage',  tab: 'ExploreTab', route: undefined as string | undefined },
-  { id: '2', icon: '🌿', label: 'Nature',    tab: 'ExploreTab', route: undefined as string | undefined },
-  { id: '3', icon: '🕌', label: 'Religious', tab: 'ExploreTab', route: undefined as string | undefined },
-  { id: '4', icon: '🏺', label: 'Museum',    tab: 'ExploreTab', route: undefined as string | undefined },
+  { id: '1', icon: '🏨', label: 'Hotels',    tab: 'ExploreTab', route: 'Accommodation' as string | undefined },
+  { id: '2', icon: '🏛️', label: 'Heritage',  tab: 'ExploreTab', route: undefined as string | undefined },
+  { id: '3', icon: '🌿', label: 'Nature',    tab: 'ExploreTab', route: undefined as string | undefined },
+  { id: '4', icon: '🕌', label: 'Religious', tab: 'ExploreTab', route: undefined as string | undefined },
   { id: '5', icon: '🍽️', label: 'Dining',    tab: 'ExploreTab', route: 'Dining' as string | undefined },
   { id: '6', icon: '🛍️', label: 'Shopping',  tab: 'ExploreTab', route: 'Shopping' as string | undefined },
 ];
@@ -59,11 +60,15 @@ export default function HomeScreen() {
 
   React.useEffect(() => { if (!user) login('demo', 'demo'); }, []);
 
-  const featuredExperiences = attractions.filter((a) => a.isFeatured).slice(0, 5);
-  const popularDestinations = attractions.filter((a) => a.isFeatured).slice(0, 6);
-  const recommended = attractions.filter((a) => a.isFeatured).slice(0, 4);
+  const allFeatured = attractions.filter((a) => a.isFeatured);
+  const featuredExperiences = allFeatured.slice(0, 5);
+  const featuredIds = new Set(featuredExperiences.map((a) => a.id));
+  const recommended = allFeatured.filter((a) => !featuredIds.has(a.id)).slice(0, 4);
+  const usedIds = new Set([...featuredIds, ...recommended.map((a) => a.id)]);
+  const popularDestinations = attractions.filter((a) => !usedIds.has(a.id)).slice(0, 6);
   const leftRec  = recommended.filter((_, i) => i % 2 === 0);
   const rightRec = recommended.filter((_, i) => i % 2 !== 0);
+  const topHotels = [...hotels].sort((a, b) => b.rating - a.rating).slice(0, 4);
 
   const goToDetail = (id: string) =>
     navigation.getParent()?.navigate('ExploreTab', { screen: 'AttractionDetail', params: { id } });
@@ -269,6 +274,39 @@ export default function HomeScreen() {
                 <View style={styles.placeMeta}>
                   <Text style={styles.placeStar}>⭐ {item.rating.toFixed(1)}</Text>
                   <Text style={styles.placePrice}>{item.price === 0 ? 'Free' : `SAR ${item.price}`}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+
+        {/* ── Top Hotels ─────────────────────────────────────────────── */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Top Hotels</Text>
+          <TouchableOpacity onPress={() => navigation.getParent()?.navigate('ExploreTab', { screen: 'Accommodation' })}>
+            <Text style={styles.seeAll}>See All</Text>
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={topHotels}
+          horizontal
+          nestedScrollEnabled
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.placeList}
+          keyExtractor={(item) => `hotel_${item.id}`}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.placeCard}
+              onPress={() => navigation.getParent()?.navigate('ExploreTab', { screen: 'HotelDetail', params: { id: item.id } })}
+              activeOpacity={0.85}
+            >
+              <Image source={{ uri: item.images[0] }} style={styles.placeImg} contentFit="cover" transition={200} />
+              <View style={styles.placeInfo}>
+                <Text style={styles.placeName} numberOfLines={1}>{item.name}</Text>
+                <Text style={styles.placeCity} numberOfLines={1}>📍 {item.city}</Text>
+                <View style={styles.placeMeta}>
+                  <Text style={styles.placeStar}>{'⭐'} {item.rating.toFixed(1)}</Text>
+                  <Text style={styles.placePrice}>SAR {item.pricePerNight}/n</Text>
                 </View>
               </View>
             </TouchableOpacity>
