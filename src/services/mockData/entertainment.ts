@@ -132,7 +132,7 @@ export const entertainmentVenues = [
     nameAr: 'ذا جروفز',
     description: 'A family-friendly entertainment complex in Riyadh featuring indoor theme parks, play zones, dining, and immersive experiences for all ages.',
     type: 'theme_park' as const,
-    images: ['https://images.pexels.com/photos/3100361/pexels-photo-3100361.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/167605/pexels-photo-167605.jpeg?auto=compress&cs=tinysrgb&w=800'],
+    images: ['https://images.pexels.com/photos/16038805/pexels-photo-16038805.jpeg?auto=compress&cs=tinysrgb&w=800', 'https://images.pexels.com/photos/167605/pexels-photo-167605.jpeg?auto=compress&cs=tinysrgb&w=800'],
     city: 'Riyadh',
     latitude: 24.7100,
     longitude: 46.6800,
